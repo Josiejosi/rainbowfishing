@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use Carbon\Carbon ;
 
+use App\Classes\Helpers ;
+
 class HomeController extends Controller {
 
     public function __construct() { $this->middleware('auth') ; }

@@ -8,7 +8,9 @@ class Orders extends Model
 {
 	
     protected $fillable = [
-        'name', 'email', 'password', 'role', 'is_active', 'is_blocked',
+
+        'status', 'amount', 'user_id', 'sender_id', 'is_matured', 'matures_at',
+        
     ];
 
 }

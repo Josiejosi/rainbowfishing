@@ -14,8 +14,15 @@ class CreatePopsTable extends Migration
     public function up()
     {
         Schema::create('pops', function (Blueprint $table) {
-            $table->increments('id');
+
+            $table->bigIncrements('id');
+            $table->string('pop');
+            $table->bigInteger('user_id')->unsigned();
+
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade') ;
+            
         });
     }
 

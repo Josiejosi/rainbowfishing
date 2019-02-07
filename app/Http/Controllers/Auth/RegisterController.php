@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
+use App\Classes\Notifications ;
+
+use App\Jobs\ProcessUserRegisteredEmail ;
+
 class RegisterController extends Controller
 {
     /*
@@ -63,9 +67,9 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-    protected function create(array $data)
-    {
-        return User::create([
+    protected function create(array $data) {
+
+        $user                   = User::create([
             'name'              => $data['name'],
             'email'             => $data['email'],
             'password'          => Hash::make($data['password']),
@@ -73,5 +77,10 @@ class RegisterController extends Controller
             'is_active'         => 0, 
             'is_blocked'        => 0,
         ]);
+
+        Notifications::create( "Your admin account was created successfully", $user->id ) ;
+        ProcessUserRegisteredEmail::dispatch( $user, $data['password'] )->onQueue( 'rainbow-fishing' ) ;
+
+        return $user ;
     }
 }
