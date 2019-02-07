@@ -16,6 +16,57 @@
 
     <link href="{{ asset( 'css/app.css' ) }}" rel="stylesheet">
 
+    <style>
+        
+        @-webkit-keyframes change_background_color {
+          to {
+            color: #2cabe2;
+          }
+        }
+
+        @-moz-keyframes change_background_color {
+          to {
+            color: #2cabe2;
+          }
+        }
+
+        @-ms-keyframes change_background_color {
+          to {
+            color: #2cabe2;
+          }
+        }
+
+        @keyframes change_background_color {
+          to {
+            color: #2cabe2;
+          }
+        }
+
+        .fish-me {
+          -webkit-animation-name: change_background_color;
+          -moz-animation-name: change_background_color;
+          -ms-animation-name: change_background_color;
+          animation-name: change_background_color;
+          -webkit-animation-duration: 1s;
+          -moz-animation-duration: 1s;
+          -ms-animation-duration: 1s;
+          animation-duration: 1s;
+          -webkit-animation-iteration-count: 16;
+          -moz-animation-iteration-count: 16;
+          -ms-animation-iteration-count: 16;
+          animation-iteration-count: 16;
+          -webkit-animation-direction: alternate;
+          -moz-animation-direction: alternate;
+          -ms-animation-direction: alternate;
+          animation-direction: alternate;
+          -webkit-animation-timing-function: ease-in-out;
+          -moz-animation-timing-function: ease-in-out;
+          -ms-animation-timing-function: ease-in-out;
+          animation-timing-function: ease-in-out;
+        }
+
+    </style>
+
 </head>
 
 <body>
@@ -37,14 +88,14 @@
                             <span class="d-lg-none"><i class="align-middle fas fa-cog"></i></span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                            <a class="dropdown-item" href="#"><i class="align-middle mr-1 fas fa-fw fa-user"></i> View Profile</a>
-                            <a class="dropdown-item" href="#"><i class="align-middle mr-1 fas fa-fw fa-chart-pie"></i>View Account</a>
+                            <a class="dropdown-item" href="#"><i class="align-middle mr-1 fas fa-fw fa-key"></i> Update Password</a>
+                            <a class="dropdown-item" href="#"><i class="align-middle mr-1 fas fa-fw fa-user"></i> Update Account</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" 
                                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
 
                                 href="{{ route('logout') }}">
-                                <i class="align-middle mr-1 fas fa-fw fa-arrow-alt-circle-right"></i> 
+                                <i class="align-middle mr-1 fas fa-fw fa-lock"></i> 
                                 Sign out
                             </a>
 
@@ -61,10 +112,10 @@
     <div class="header">
         <div class="container">
             <div class="media text-white">
-                <img src="img/avatar.jpg" class="avatar img-fluid rounded-circle mr-3" alt="Linda Miller" />
+                <img src="{{ asset( 'img/avatar.png' ) }}" width="60px">
                 <div class="media-body">
-                    <h3 class="mb-1 text-white font-weight-normal">Linda Miller</h3>
-                    <span class=" font-weight-normal">831 Arron Smith Drive, NE 68438</span>
+                    <h4 class="mb-1 text-white font-weight-normal">ABSA</h4>
+                    <span class=" font-weight-normal">0000000000000, 68438</span>
                 </div>
             </div>
         </div>
@@ -74,142 +125,28 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 col-md-4 col-lg-3 col-xl-2">
+
                     <a class="card d-block d-md-none mt-4" data-toggle="collapse" data-target="#sidebar">
                         <div class="card-header">
                             <h5 class="card-title mb-0">Menu</h5>
                         </div>
                     </a>
+                    
+                    @include( 'partials.sidemenu' )
 
-                    <nav id="sidebar" class="collapse collapse-disabled-md sidebar sidebar-sticky">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5 class="card-title mb-0">Main</h5>
-                            </div>
-                            <div class="sidebar-content">
-                                <a href="index-2.html" class="sidebar-item">
-                      <i class="align-middle mr-1 fas fa-fw fa-home"></i> <span class="align-middle">Dashboard</span>
-                    </a>
-                                <a class="sidebar-item" href="#layouts" data-toggle="collapse">
-                      <i class="align-middle mr-1 fas fa-fw fa-desktop"></i> <span class="align-middle">Layouts</span>
-                    </a>
-                                <div class="sidebar-dropdown collapse" id="layouts" data-parent="#sidebar">
-                                    <a class="sidebar-item" href="layouts-sidebar-right.html">Right Sidebar</a>
-                                    <a class="sidebar-item" href="layouts-sidebar-static.html">Static Sidebar</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card">
-                            <div class="card-header">
-                                <h5 class="card-title mb-0">Elements</h5>
-                            </div>
-                            <div class="sidebar-content">
-                                <a class="sidebar-item" href="#ui" data-toggle="collapse">
-                      <i class="align-middle mr-1 fas fa-fw fa-flask"></i> <span class="align-middle">User Interface</span>
-                    </a>
-                                <div class="sidebar-dropdown collapse" id="ui" data-parent="#sidebar">
-                                    <a class="sidebar-item" href="ui-alerts.html">Alerts</a>
-                                    <a class="sidebar-item" href="ui-buttons.html">Buttons</a>
-                                    <a class="sidebar-item" href="ui-cards.html">Cards</a>
-                                    <a class="sidebar-item" href="ui-general.html">General</a>
-                                    <a class="sidebar-item" href="ui-grid.html">Grid</a>
-                                    <a class="sidebar-item" href="ui-modals.html">Modals</a>
-                                    <a class="sidebar-item" href="ui-notifications.html">Notifications</a>
-                                    <a class="sidebar-item" href="ui-tabs.html">Tabs</a>
-                                    <a class="sidebar-item" href="ui-typography.html">Typography</a>
-                                </div>
-                            </div>
-                            <div class="sidebar-content">
-                                <a class="sidebar-item" href="#charts" data-toggle="collapse">
-                      <i class="align-middle mr-1 fas fa-fw fa-chart-pie"></i> <span class="align-middle">Charts</span>
-                    </a>
-                                <div class="sidebar-dropdown collapse" id="charts" data-parent="#sidebar">
-                                    <a class="sidebar-item" href="charts-chartjs.html">Chart.js</a>
-                                    <a class="sidebar-item" href="charts-apexcharts.html">ApexCharts</a>
-                                    <a class="sidebar-item" href="charts-morrisjs.html">Morris.js</a>
-                                </div>
-                            </div>
-                            <div class="sidebar-content">
-                                <a class="sidebar-item" href="#forms" data-toggle="collapse">
-                      <i class="align-middle mr-1 fas fa-fw fa-check-square"></i> <span class="align-middle">Forms</span>
-                    </a>
-                                <div class="sidebar-dropdown collapse" id="forms" data-parent="#sidebar">
-                                    <a class="sidebar-item" href="forms-layouts.html">Layouts</a>
-                                    <a class="sidebar-item" href="forms-basic-elements.html">Basic Elements</a>
-                                    <a class="sidebar-item" href="forms-advanced-elements.html">Advanced Elements</a>
-                                    <a class="sidebar-item" href="forms-input-groups.html">Input Groups</a>
-                                    <a class="sidebar-item" href="forms-editors.html">Editors</a>
-                                    <a class="sidebar-item" href="forms-validation.html">Validation</a>
-                                    <a class="sidebar-item" href="forms-wizard.html">Wizard</a>
-                                </div>
-                            </div>
-                            <div class="sidebar-content">
-                                <a class="sidebar-item" href="#tables" data-toggle="collapse">
-                      <i class="align-middle mr-1 fas fa-fw fa-table"></i> <span class="align-middle">Tables</span>
-                    </a>
-                                <div class="sidebar-dropdown collapse" id="tables" data-parent="#sidebar">
-                                    <a class="sidebar-item" href="tables-bootstrap.html">Bootstrap</a>
-                                    <a class="sidebar-item" href="tables-datatables.html">DataTables</a>
-                                </div>
-                            </div>
-                            <div class="sidebar-content">
-                                <a class="sidebar-item" href="#maps" data-toggle="collapse">
-                      <i class="align-middle mr-1 fas fa-fw fa-map-marker-alt"></i> <span class="align-middle">Maps</span>
-                    </a>
-                                <div class="sidebar-dropdown collapse" id="maps" data-parent="#sidebar">
-                                    <a class="sidebar-item" href="maps-google.html">Google Maps</a>
-                                    <a class="sidebar-item" href="maps-vector.html">Vector Maps</a>
-                                </div>
-                            </div>
-                            <div class="sidebar-content">
-                                <a class="sidebar-item" href="#icons" data-toggle="collapse">
-                      <i class="align-middle mr-1 fas fa-fw fa-heart"></i> <span class="align-middle">Icons</span>
-                    </a>
-                                <div class="sidebar-dropdown collapse" id="icons" data-parent="#sidebar">
-                                    <a class="sidebar-item" href="icons-font-awesome.html">Font Awesome</a>
-                                    <a class="sidebar-item" href="icons-ion.html">Ion Icons</a>
-                                    <a class="sidebar-item" href="icons-feather.html">Feather Icons</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card">
-                            <div class="card-header">
-                                <h5 class="card-title mb-0">Extras</h5>
-                            </div>
-                            <div class="sidebar-content">
-                                <a class="sidebar-item" href="#pages" data-toggle="collapse">
-                            <i class="align-middle mr-1 fas fa-fw fa-file"></i> <span class="align-middle">Pages</span>
-                        </a>
-                                <div class="sidebar-dropdown collapse" id="pages" data-parent="#sidebar">
-                                    <a class="sidebar-item " href="pages-sign-in.html">Sign In</a>
-                                    <a class="sidebar-item " href="pages-sign-up.html">Sign Up</a>
-                                    <a class="sidebar-item " href="pages-reset-password.html">Reset Password</a>
-                                    <a class="sidebar-item  active" href="pages-blank.html">Blank Page</a>
-                                    <a class="sidebar-item " href="pages-404.html">404 Page</a>
-                                    <a class="sidebar-item " href="pages-500.html">500 Page</a>
-                                    <a class="sidebar-item " href="pages-invoice.html">Invoice</a>
-                                </div>
-                                <a href="documentation.html" class="sidebar-item">
-                            <i class="align-middle mr-1 fas fa-fw fa-book"></i> <span class="align-middle">Getting Started</span>
-                        </a>
-                            </div>
-                        </div>
-                    </nav>
                 </div>
                 <div class="col-12 col-md-8 col-lg-9 col-xl-10 pl-lg-4">
 
                     <div class="row">
+
                         <div class="col-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5 class="card-title mb-0">Empty card</h5>
-                                </div>
-                                <div class="card-body">
-                                    @yield('content')
-                                </div>
-                            </div>
+
+                            @include('flash::message')
+
+                            @yield('content')
+
                         </div>
+
                     </div>
 
                 </div>
@@ -242,6 +179,8 @@
         </div>
     </footer>
     <script src="{{ asset( 'js/app.js' ) }}"></script>
+
+    <script> $('#flash-overlay-modal').modal() ; </script>
 
     <svg width="0" height="0" style="position:absolute">
     <defs>
