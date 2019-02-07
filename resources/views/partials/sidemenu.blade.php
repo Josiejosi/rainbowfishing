@@ -11,7 +11,7 @@
                                     <span class="align-middle">Dashboard</span>
                                 </a>
                                 <a href="{{ url( '/account' ) }}" class="sidebar-item">
-                                    <i class="align-middle mr-1 fas fa-fw fa-cc-mastercard"></i> 
+                                    <i class="align-middle mr-1 fas fa-fw fa-sliders-h"></i>
                                     <span class="align-middle">Account</span>
                                 </a>
                                 <a href="{{ url( '/password' ) }}" class="sidebar-item">
@@ -31,12 +31,14 @@
                                     <i class="fas fa-angle-double-down"></i>
                                     <span class="align-middle">Incoming</span>
                                 </a>
-                                <a href="{{ url( '/outcoing' ) }}" class="sidebar-item">
+                                <a href="{{ url( '/outgoing' ) }}" class="sidebar-item">
                                     <i class="fas fa-angle-double-up"></i>
                                     <span class="align-middle">Outgoing</span>
                                 </a>
                             </div>
                         </div>
+
+                        @if ( auth()->user()->role == 2 )
 
                         <div class="card">
                             <div class="card-header">
@@ -58,5 +60,7 @@
                                 </a>
                             </div>
                         </div>
+
+                        @endif
 
                     </nav>

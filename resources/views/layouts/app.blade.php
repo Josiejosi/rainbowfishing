@@ -76,7 +76,7 @@
 
     <nav class="navbar navbar-expand navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand" href="/home"><img src="{{ asset( 'img/icon.png' ) }}" height="65px"></a>
+            <a class="navbar-brand" href="/home"><img src="{{ asset( 'img/icon.png' ) }}" height="45px"></a>
 
             <div class="navbar-collapse collapse">
                 <ul class="navbar-nav ml-auto">
@@ -112,10 +112,14 @@
     <div class="header">
         <div class="container">
             <div class="media text-white">
-                <img src="{{ asset( 'img/avatar.png' ) }}" width="60px">
+                <img src="{{ asset( 'img/avatar.png' ) }}" width="45px">
                 <div class="media-body">
-                    <h4 class="mb-1 text-white font-weight-normal">ABSA</h4>
-                    <span class=" font-weight-normal">0000000000000, 68438</span>
+                    @if ( auth()->user()->account != null )
+                    <h4 class="mb-1 text-white font-weight-normal">{{ auth()->user()->account->bank }}</h4>
+                    <span class=" font-weight-normal">{{ auth()->user()->account->account_holder }}, {{ auth()->user()->account->account_number }}</span>
+                    @else
+                    <span class=" font-weight-normal">Bank Account not linked.</span>
+                    @endif
                 </div>
             </div>
         </div>

@@ -17,6 +17,14 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home') ;
 Route::get('/member/details/{user_id}', 'DetailsController@index') ;
+Route::get('/password', 'ProfileController@index')->name('password')  ;
+Route::post('/password/update', 'ProfileController@password_update') ;
+
+Route::get('/account', 'AccountController@index')->name('account')  ;
+Route::post('/account/update', 'AccountController@account_update') ;
+
+Route::get('/incoming', 'TransactionController@incoming')->name('incoming')  ;
+Route::get('/outgoing', 'TransactionController@outgoing')->name('outgoing')  ;
 
 
 /*

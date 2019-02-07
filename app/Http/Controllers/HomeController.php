@@ -14,7 +14,15 @@ class HomeController extends Controller {
 
     public function index() {
 
-        return view( 'home', ['list_hour' => $this->list_hour() ] ) ;
+        $linked_account             = false ;
+
+        if ( auth()->user()->account != null ) {
+
+            $linked_account         = true ;
+            
+        }
+
+        return view( 'home', ['list_hour' => $this->list_hour(), 'linked_account' => $linked_account, ] ) ;
 
     }
 

@@ -12,4 +12,10 @@ class Account extends Model {
         'bank', 'account_holder', 'account_number', 'branch_code', 'branch_number', 'user_id',
     ];
 
+    public function user()  {
+
+        return $this->belongsTo( User::class ) ;
+
+    }
+
 }
