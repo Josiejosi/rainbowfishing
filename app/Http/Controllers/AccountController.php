@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Account ;
 
+use App\Classes\Notifications ;
+
 class AccountController extends Controller
 {
     public function __construct() { $this->middleware('auth') ; }
@@ -28,6 +30,7 @@ class AccountController extends Controller
 
 
     	if ( Account::where( 'user_id', auth()->user()->id )->count() == 1 ) {
+
     		Account::where( 'user_id', auth()->user()->id )->update([
 
 	    		'bank'					=> $request->bank, 
@@ -37,6 +40,9 @@ class AccountController extends Controller
 	    		'branch_number' 		=> isset( $request->branch_number ) ? $request->branch_number : '', 
 
     		]) ;
+
+    		Notifications::create( "You added new banking details", auth()->user()->id ) ;
+
     	} else {
 
 	    	$account 					= Account::create([
@@ -49,6 +55,9 @@ class AccountController extends Controller
 	    		'user_id'				=> auth()->user()->id,
 
 	    	]) ;
+
+	    	Notifications::create( "You have updated your banking details.", auth()->user()->id ) ;
+	    	
     	}
 
 

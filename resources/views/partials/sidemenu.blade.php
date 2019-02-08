@@ -28,12 +28,16 @@
                             <div class="sidebar-content">
 
                                 <a href="{{ url( '/incoming' ) }}" class="sidebar-item">
-                                    <i class="fas fa-angle-double-down"></i>
+                                    <i class="align-middle mr-1 fas fa-angle-double-down"></i>
                                     <span class="align-middle">Incoming</span>
                                 </a>
                                 <a href="{{ url( '/outgoing' ) }}" class="sidebar-item">
-                                    <i class="fas fa-angle-double-up"></i>
+                                    <i class="align-middle mr-1 fas fa-angle-double-up"></i>
                                     <span class="align-middle">Outgoing</span>
+                                </a>
+                                <a href="{{ url( '/upcoming' ) }}" class="sidebar-item">
+                                    <i class="align-middle mr-1 fas fa-angle-double-up"></i>
+                                    <span class="align-middle">Upcoming</span>
                                 </a>
                             </div>
                         </div>

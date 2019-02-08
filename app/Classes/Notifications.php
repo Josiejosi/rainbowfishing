@@ -40,7 +40,7 @@
 	    
 		public static function getUnRead( $user_id ) {
 
-			return Notification::where( 'is_viewed', 0 )->where( 'user_id', $user_id )->get() ;
+			return Notification::where( 'is_viewed', 0 )->where( 'user_id', $user_id )->orderBy( 'created_at', 'desc' )->get() ;
 
 		}
 	    

@@ -17,13 +17,18 @@ class TransactionController extends Controller {
 
     public function incoming() {
 
-        return view( 'incoming' ) ;
+        
+        $incoming                   = Orders::where( 'user_id', auth()->user()->id )->where( 'status','<>', 0 )->get() ;
+
+        return view( 'incoming', ['incoming'=>$incoming]  ) ;
 
     }
 
     public function outgoing() {
 
-        return view( 'outgoing' ) ;
+    	$outgoing                   = Orders::where( 'sender_id', auth()->user()->id )->where( 'status','<>', 0 )->get() ;
+
+        return view( 'outgoing', ['outgoing'=>$outgoing] ) ;
 
     }
 

@@ -45,8 +45,14 @@ class User extends Authenticatable
 
     public function notifications() {
 
-        return $this->belongsToMany( Notification::class ) ;
+        return $this->hasMany( Notification::class ) ;
 
+    }
+
+    public function orders() {
+
+        return $this->hasMany( Order::class ) ;
+        
     }
 
 }

@@ -8,6 +8,50 @@
 
         <div class="card-body p-4">
 
+        	<div class="row">
+        		<div class="col-md-6 offset-md-3">
+        			<div class="table-responsive">
+        				<table class="table table-hover">
+        					<thead>
+        						<th colspan="2">Member Banking Details</th>
+        					</thead>
+        					<tbody>
+        						<tr>
+        							<td>Bank:</td>
+        							<td>{{ $order->user->account->bank }}</td>
+        						</tr>
+        						<tr>
+        							<td>Account Number:</td>
+        							<td>{{ $order->user->account->account_number }}</td>
+        						</tr>
+        						<tr>
+        							<td>Branch Name:</td>
+        							<td>{{ $order->user->account->branch_number }}</td>
+        						</tr>
+        						<tr>
+        							<td>Branch Code:</td>
+        							<td>{{ $order->user->account->branch_code }}</td>
+        						</tr>
+        						<tr>
+        							<td>Amount:</td>
+        							<td>R {{ $order->amount }}</td>
+        						</tr>
+        					</tbody>
+        					<tfoot>
+        						<th colspan="2" class="text-center">
+        							<form method="POST" action="{{ url( '/member/details' ) }}">
+                						@csrf
+                						<input type="hidden" name="order_id" value="{{ $order->id }}">
+                						<input type="hidden" name="user_id" value="{{ $order->user_id }}">
+										<button type="submit" class="btn btn-success">Reserve</button>
+									</form>
+        						</th>
+        					</tfoot>
+        				</table>
+        			</div>
+        		</div>
+        	</div>
+
         </div>
 
     </div>
