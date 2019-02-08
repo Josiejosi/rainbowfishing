@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Hash;
 
 use App\User ;
 
+use App\Classes\Notifications ;
+
 class ProfileController extends Controller
 {
     public function __construct() { $this->middleware('auth') ; }
@@ -28,6 +30,8 @@ class ProfileController extends Controller
         $user 						= User::find( auth()->user()->id ) ;
 
         $user->update(['password' => Hash::make($request->password),]); 
+
+        Notifications::create( "Password updated successfully.", $user->id ) ;
 
         flash( 'Password updated successfully.' )->success() ;
         return redirect()->back() ; 

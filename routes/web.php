@@ -26,6 +26,9 @@ Route::post('/account/update', 'AccountController@account_update') ;
 Route::get('/incoming', 'TransactionController@incoming')->name('incoming')  ;
 Route::get('/outgoing', 'TransactionController@outgoing')->name('outgoing')  ;
 
+Route::get('/notifications', 'NotificationsController@index')  ;
+Route::get('/notification/markasread/{notification_id}', 'NotificationsController@notification_markasread')  ;
+
 
 /*
 |--------------------------------------------------------------------------
