@@ -25,14 +25,30 @@ class DetailsController extends Controller
     
     public function reserve_member( Request $request) {
 
-    	$order = Orders::find( $request->order_id ) ;
+        $order = Orders::find( $request->order_id ) ;
 
-    	$order->update( [ 'status' => '1', 'sender_id' => auth()->user()->id ] ) ;
+        $order->update( [ 'status' => '1', 'sender_id' => auth()->user()->id ] ) ;
 
-    	Notifications::create( "You reserved Order: RF00" . $request->order_id . ", Please make a payment in the next 3 hours.", $request->user_id ) ;
-    	Notifications::create( "Your  Order: RF00" . $request->order_id . ", was reserved.", auth()->user()->id ) ;
+        Notifications::create( "You reserved Order: RF00" . $request->order_id . ", Please make a payment in the next 3 hours.", $request->user_id ) ;
+        Notifications::create( "Your  Order: RF00" . $request->order_id . ", was reserved.", auth()->user()->id ) ;
 
         flash( "You reserved <b>'Order: RF00" . $request->order_id . "'</b>, Please make a payment in the next 3 hours."  )->success() ;
+
+        return redirect( '/home' ) ;
+
+    }
+
+    
+    public function drop_order( Request $request) {
+
+    	$order = Orders::find( $request->order_id ) ;
+
+    	$order->update( [ 'status' => 0, 'sender_id' => '0', 'is_matured' => 0, ] ) ;
+
+    	//Notifications::create( "You just drop this order RF00" . $request->order_id , $order->sender_id ) ;
+    	//Notifications::create( "Your  Order: RF00" . $request->order_id . ", was drop, you now back on the fishing list.", auth()->user()->id ) ;
+
+        flash( "You dropped <b>'Order: RF00" . $request->order_id . "'</b>"  )->success() ;
 
     	return redirect( '/home' ) ;
 

@@ -16,21 +16,25 @@
         						<th colspan="2">Member Banking Details</th>
         					</thead>
         					<tbody>
+                                <tr>
+                                    <td>Phone Number:</td>
+                                    <td>{{ isset( $order->user->phone_number ) ? $order->user->phone_number : 'Not set' }}</td>
+                                </tr>
         						<tr>
         							<td>Bank:</td>
-        							<td>{{ $order->user->account->bank }}</td>
+        							<td>{{ isset( $order->user->account->bank ) ? $order->user->account->bank : 'Not set' }}</td>
         						</tr>
         						<tr>
         							<td>Account Number:</td>
-        							<td>{{ $order->user->account->account_number }}</td>
+        							<td>{{ isset( $order->user->account->account_number ) ? $order->user->account->account_number : '' }}</td>
         						</tr>
         						<tr>
         							<td>Branch Name:</td>
-        							<td>{{ $order->user->account->branch_number }}</td>
+        							<td>{{ isset( $order->user->account->branch_number ) ? $order->user->account->branch_number : '' }}</td>
         						</tr>
         						<tr>
         							<td>Branch Code:</td>
-        							<td>{{ $order->user->account->branch_code }}</td>
+        							<td>{{ isset( $order->user->account->branch_code  ) ? $order->user->account->branch_code : '' }}</td>
         						</tr>
         						<tr>
         							<td>Amount:</td>

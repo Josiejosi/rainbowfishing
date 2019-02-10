@@ -164,6 +164,9 @@
                                                 <a type="button" class="btn btn-primary btn-sm" href="{{ url('/send/payment') }}/{{ $order->id }}">
                                                     <i class="fas fa-fish"></i> Confirm Sending
                                                 </a>
+                                                <a type="button" class="btn btn-primary btn-sm" href="{{ url('/drop/order') }}/{{ $order->id }}">
+                                                    <i class="fas fa-fish"></i> Drop Order
+                                                </a>
                                                 @elseif ( $order->status == 2 )
                                                     <span class="badge badge-info">Awaiting Approval</span>
                                                 @elseif ( $order->status == 3 )

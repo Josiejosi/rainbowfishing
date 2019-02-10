@@ -14,6 +14,10 @@
                                     <i class="align-middle mr-1 fas fa-fw fa-sliders-h"></i>
                                     <span class="align-middle">Account</span>
                                 </a>
+                                <a href="{{ url( '/phone' ) }}" class="sidebar-item">
+                                    <i class="align-middle mr-1 fas fa-fw fa-phone"></i>
+                                    <span class="align-middle">Update Phone</span>
+                                </a>
                                 <a href="{{ url( '/password' ) }}" class="sidebar-item">
                                     <i class="align-middle mr-1 fas fa-fw fa-money-check-alt"></i>
                                     <span class="align-middle">Password</span>

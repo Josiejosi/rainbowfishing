@@ -28,6 +28,7 @@ class HomeController extends Controller {
         $orders                     = Orders::where( 'matures_at', '<', Carbon::now() )
                                              ->where( 'status', 0 )
                                              ->where( 'user_id', '<>', auth()->user()->id )
+                                             ->orderBy('matures_at', 'desc')->take(15)
                                              ->get() ;
 
         $outgoing                   = Orders::where( 'sender_id', auth()->user()->id )->where( 'status','<>', 0 )->get() ;
