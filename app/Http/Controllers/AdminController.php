@@ -28,7 +28,8 @@ class AdminController extends Controller
 
 		$request->validate([
 
-		    'name' 					=> 'required',
+            'name'                  => 'required',
+		    'phone_number' 			=> 'required',
 		    'email' 				=> 'required|unique:users|max:255',
 		    'password' 				=> 'required|min:6|confirmed',
 		    
@@ -36,7 +37,8 @@ class AdminController extends Controller
 
         $user 						= User::create([
 
-            'name'              	=> $request->name,
+            'name'                  => $request->name,
+            'phone_number'          => $request->phone_number,
             'email'             	=> $request->email,
             'password'          	=> Hash::make($request->password),
             'role'              	=> 2, 
