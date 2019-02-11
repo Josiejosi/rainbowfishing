@@ -1,9 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
-
-<!-- Mirrored from spark.bootlab.io/pages-blank.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Jan 2019 04:48:57 GMT -->
-<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -148,6 +144,7 @@
                             @include('flash::message')
 
                             @yield('content')
+                            
 
                         </div>
 
@@ -183,6 +180,8 @@
         </div>
     </footer>
     <script src="{{ asset( 'js/app.js' ) }}"></script>
+
+    @yield('js')
 
     <script> $('#flash-overlay-modal').modal() ; </script>
 

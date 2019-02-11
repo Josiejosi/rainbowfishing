@@ -66,6 +66,22 @@
                 </div>
             @endif
 
+            @if ( count( $outgoing ) )
+
+                @foreach( $outgoing as $order )
+
+                    @if ( $order->status == 1 )
+
+                    <div class="alert alert-danger p-4 text-center" id="block{{ $order->id }}" role="alert">
+                        <h3>{{ $order->block_at }} Remaining to make a payment to order: RF00 {{ $order->id }} </a></h3>
+                    </div>
+
+                    @endif
+
+                @endforeach
+
+            @endif
+
             @if ( !$linked_account )
                 <div class="alert alert-warning p-4" role="alert">
                     <h3>You need to link your bank account to start <a href="{{ url( '/account' ) }}" class="btn btn-success">Add Account</a></h3>
@@ -111,9 +127,13 @@
                                         <td>{{ $order->user->account->bank }}</td>
                                         <td>R {{ $order->amount }}</td>
                                         <td>
-                                            <a type="button" class="btn btn-primary fish-me" href="{{ url('/member/details/') }}/{{ $order->id }}">
-                                                <i class="fas fa-fish"></i> Catch
-                                            </a>
+                                            @if ( $linked_account )
+                                                <a class="btn btn-primary fish-me" href="{{ url('/member/details/') }}/{{ $order->id }}">
+                                                    <i class="fas fa-fish"></i> Catch
+                                                </a>
+                                            @else
+                                                <span class="badge badge-info">Link Account</span>
+                                            @endif
                                         </td>
                                     </tr>
 
@@ -137,7 +157,7 @@
     </div>
 
     <div class="row">
-        <div class="col-6">
+        <div class="col-sm-12 col-md-6 col-lg-6">
             <div class="card">
                 <div class="card-header">Outgoing Transactions</div>
 
@@ -161,17 +181,17 @@
                                             <td>R {{ $order->amount }}</td>
                                             <td>
                                                 @if ( $order->status == 1 )
-                                                <a type="button" class="btn btn-primary btn-sm" href="{{ url('/send/payment') }}/{{ $order->id }}">
-                                                    <i class="fas fa-fish"></i> Confirm Sending
+                                                <a type="button" class="btn btn-success" href="{{ url('/send/payment') }}/{{ $order->id }}">
+                                                    Confirm Sending
                                                 </a>
-                                                <a type="button" class="btn btn-primary btn-sm" href="{{ url('/drop/order') }}/{{ $order->id }}">
-                                                    <i class="fas fa-fish"></i> Drop Order
+                                                <a type="button" class="btn btn-danger" href="{{ url('/drop/order') }}/{{ $order->id }}">
+                                                    Drop Order
                                                 </a>
                                                 @elseif ( $order->status == 2 )
                                                     <span class="badge badge-info">Awaiting Approval</span>
                                                 @elseif ( $order->status == 3 )
 
-                                                    <span class="badge badge-indo">Received</span>
+                                                    <span class="badge badge-info">Received</span>
 
                                                 @endif
                                             </td>
@@ -194,7 +214,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-6">
+        <div class="col-sm-12 col-md-6 col-lg-6">
             <div class="card">
                 <div class="card-header">Incoming Transactions</div>
 
@@ -221,7 +241,7 @@
                                                     <span class="badge badge-info">Reserved</span>
 
                                                 @elseif ( $order->status == 2 )
-                                                <a type="button" class="btn btn-primary btn-sm" href="{{ url('/received/payment') }}/{{ $order->id }}">
+                                                <a type="button" class="btn btn-success" href="{{ url('/received/payment') }}/{{ $order->id }}">
                                                     Confirm Received
                                                 </a>
                                                 @elseif ( $order->status == 3 )
@@ -251,3 +271,45 @@
     </div>
 
 @endsection
+
+@section('js')
+
+<script src="{{ asset( 'js/jquery.countdown.js' ) }}"></script>
+
+<script>
+ 
+    @if ( count( $outgoing ) )
+
+        @foreach( $outgoing as $order )
+
+            @if ( $order->status == 1 )
+
+
+                $( '#block{{ $order->id }}' ).countdown( '{{ $order->block_at }}' ).on('update.countdown', function(event) {
+
+                    var format = '%H:%M:%S';
+
+                    if(event.offset.totalDays > 0) {
+                        format = '%-d day%!d ' + format;
+                    }
+                    if(event.offset.weeks > 0) {
+                        format = '%-w week%!w ' + format;
+                    }
+                    var amount = {{ $order->amount }} ;
+
+                    $( this ).html( event.strftime( format + ' Remaining to make a payment of ' + amount ) );
+
+                }).on('finish.countdown', function(event) {
+                    $(this).html('This offer has expired!').parent().addClass('disabled');
+                }) ;
+
+            @endif
+
+        @endforeach
+
+    @endif   
+
+</script>
+
+@endsection
+

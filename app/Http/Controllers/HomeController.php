@@ -31,11 +31,20 @@ class HomeController extends Controller {
                                              ->orderBy('matures_at', 'desc')->take(15)
                                              ->get() ;
 
-        $outgoing                   = Orders::where( 'sender_id', auth()->user()->id )->where( 'status','<>', 0 )->get() ;
-        $incoming                   = Orders::where( 'user_id', auth()->user()->id )->where( 'status','<>', 0 )->get() ;
+        $outgoing                   = Orders::where( 'sender_id', auth()->user()->id )
+                                            ->where( 'status','<>', 0 )
+                                            ->orderBy('updated_at', 'desc')
+                                            ->take(5)
+                                            ->get() ;
+
+        $incoming                   = Orders::where( 'user_id', auth()->user()->id )
+                                             ->where( 'status','<>', 0 )
+                                             ->orderBy('updated_at', 'desc')
+                                             ->take(5)
+                                             ->get() ;
 
         $outgoing_amount            = Orders::where( 'sender_id', auth()->user()->id )->where( 'status', 3 )->get()->sum('amount') ;
-        $pending_amount             = Orders::where( 'sender_id', auth()->user()->id )->where( 'status', 1 )->where( 'status', 2 )->get()->sum('amount') ;
+        $pending_amount             = Orders::where( 'sender_id', auth()->user()->id )->where( 'status', 1 )->orWhere( 'status', 2 )->get()->sum('amount') ;
         $incoming_amount            = Orders::where( 'user_id', auth()->user()->id )->where( 'status', 3 )->get()->sum('amount') ;
 
         return view( 'home', [

@@ -27,7 +27,7 @@ class DetailsController extends Controller
 
         $order = Orders::find( $request->order_id ) ;
 
-        $order->update( [ 'status' => '1', 'sender_id' => auth()->user()->id ] ) ;
+        $order->update( [ 'status' => '1', 'sender_id' => auth()->user()->id, 'block_at' => Carbon::now()->addHours(6) ] ) ;
 
         Notifications::create( "You reserved Order: RF00" . $request->order_id . ", Please make a payment in the next 3 hours.", $request->user_id ) ;
         Notifications::create( "Your  Order: RF00" . $request->order_id . ", was reserved.", auth()->user()->id ) ;
@@ -60,7 +60,7 @@ class DetailsController extends Controller
 
     	$order->update( [ 'status' => '3' ] ) ;
 
-    	$new_amount 				= $order->amount + ( $order->amount / 30 ) ;
+    	$new_amount 				= round( $order->amount + ( $order->amount / 30 ) ) ;
 
     	$new_order 					= Orders::create([
 
@@ -69,7 +69,8 @@ class DetailsController extends Controller
     		'user_id'				=> $order->sender_id, 
     		'sender_id' 			=> 0, 
     		'is_matured' 			=> 1, 
-    		'matures_at' 			=> Carbon::now()->addHours(5),
+            'matures_at'            => Carbon::now()->addHours(24),
+    		'block_at' 			    => null,
 
     	]) ;
 

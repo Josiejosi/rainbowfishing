@@ -20,9 +20,15 @@
                                     @foreach( $orders as $order )
 
                                         <tr>
-                                            <td>{{ $order->user->account->bank }}</td>
+                                            <td>
+                                                @if ( isset( $order->user->account->bank ) ) 
+                                                {{$order->user->account->bank  }}
+                                                @else
+                                                <a href="{{ url( '/account' ) }}" class='btn btn-success'>Add Account</a>
+                                                @endif
+                                            </td>
                                             <td>R {{ $order->amount }}</td>
-                                            <td>{{ $order->matures_at }}</td>
+                                            <td>{{ $order->matures_at->diffForHumans() }}</td>
                                         </tr>
 
                                     @endforeach
