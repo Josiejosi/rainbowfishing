@@ -60,7 +60,7 @@ class DetailsController extends Controller
 
     	$order->update( [ 'status' => '3' ] ) ;
 
-    	$new_amount 				= $order->amount + ( $order->amount / 20 ) ;
+    	$new_amount 				= $order->amount + ( $order->amount / 30 ) ;
 
     	$new_order 					= Orders::create([
 
