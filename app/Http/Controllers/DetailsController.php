@@ -69,7 +69,7 @@ class DetailsController extends Controller
     		'user_id'				=> $order->sender_id, 
     		'sender_id' 			=> 0, 
     		'is_matured' 			=> 1, 
-            'matures_at'            => Carbon::now()->addHours(24),
+            'matures_at'            => Carbon::now()->addHours(5),
     		'block_at' 			    => null,
 
     	]) ;

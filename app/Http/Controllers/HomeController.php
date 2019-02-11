@@ -44,7 +44,6 @@ class HomeController extends Controller {
                                              ->get() ;
 
         $outgoing_amount            = Orders::where( 'sender_id', auth()->user()->id )->where( 'status', 3 )->get()->sum('amount') ;
-        $pending_amount             = Orders::where( 'sender_id', auth()->user()->id )->where( 'status', 1 )->orWhere( 'status', 2 )->get()->sum('amount') ;
         $incoming_amount            = Orders::where( 'user_id', auth()->user()->id )->where( 'status', 3 )->get()->sum('amount') ;
 
         return view( 'home', [
@@ -55,8 +54,7 @@ class HomeController extends Controller {
             'outgoing'              => $outgoing, 
             'incoming'              => $incoming, 
 
-            'outgoing_amount'       => $outgoing_amount, 
-            'pending_amount'        => $pending_amount, 
+            'outgoing_amount'       => $outgoing_amount,
             'incoming_amount'       => $incoming_amount, 
 
         ]) ;
@@ -65,8 +63,8 @@ class HomeController extends Controller {
 
     private function list_hour() {
 
-        $early_list                 = true ;
-        $late_list                  = true ;
+        $early_list                 = false ;
+        $late_list                  = false ;
 
         $timezone                   = 'Africa/Johannesburg' ;
 

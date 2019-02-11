@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="row">
-        <div class="col-6 col-xl-4 d-flex">
+        <div class="col-6 col-xl-6 d-flex">
             <div class="card flex-fill">
                 <div class="card-body py-3">
                     <div class="row">
@@ -20,7 +20,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-6 col-xl-4 d-flex">
+        <div class="col-6 col-xl-6 d-flex">
             <div class="card flex-fill">
                 <div class="card-body py-3">
                     <div class="row">
@@ -37,23 +37,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-6 col-xl-4 d-flex">
-            <div class="card flex-fill">
-                <div class="card-body py-3">
-                    <div class="row">
-                        <div class="col-12 col-sm-4 align-self-center text-center text-sm-left">
-                            <div class="icon icon-warning">
-                                <i class="fas fa-dollar-sign"></i>
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-8 align-self-center text-center text-sm-right">
-                            <p class="text-muted mb-1">Pending Funds</p>
-                            <h2> R {{ $pending_amount }}</h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+
     </div>
 
     <div class="card">
