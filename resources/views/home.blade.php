@@ -66,28 +66,6 @@
 
             @endif
 
-            @if ( !$linked_account )
-                <div class="alert alert-warning p-4" role="alert">
-                    <h3>You need to link your bank account to start <a href="{{ url( '/account' ) }}" class="btn btn-success">Add Account</a></h3>
-                </div> 
-            @endif
-
-            @if ( ! $list_hour["early_list"] )
-
-                <div class="alert alert-warning p-4" role="alert">
-                    <h3>First List between {{ $list_hour["early_list_start"] }} & {{ $list_hour["early_list_ends"] }}</h3>
-                </div> 
-
-            @endif
-
-            @if ( ! $list_hour["late_list"] )
-
-                <div class="alert alert-warning p-4 text-center" role="alert">
-                    <h3>Second List between {{ $list_hour["late_list_start"] }} & {{ $list_hour["late_list_end"] }}</h3>
-                </div> 
-
-            @endif
-
             @if ( $list_hour["early_list"] ||  $list_hour["late_list"] )
                 
                 <div class="table-responsive">
@@ -134,6 +112,13 @@
                         </tbody>
                     </table>
                 </div>
+
+            @else
+
+
+                <div class="alert alert-warning p-4 text-center" role="alert">
+                    <h3>First List 12:00 PM, Second List 20:00 PM</h3>
+                </div> 
 
             @endif
 
