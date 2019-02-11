@@ -72,10 +72,10 @@
                     <table class="table table-hover">
                         <thead>
                             <tr>
-                                <th>Order #</th>
+                                <th>Ord#</th>
                                 <th>Bank</th>
-                                <th>Amount</th>
-                                <th><i class="fas fa-dice"></i></th>
+                                <th>Amt</th>
+                                <th class="text-center"><i class="fas fa-dice"></i></th>
                             </tr>
                         </thead>
                         <tbody>
