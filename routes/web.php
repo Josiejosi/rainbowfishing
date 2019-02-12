@@ -17,6 +17,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home') ;
 Route::get('/member/details/{order_id}', 'DetailsController@index') ;
+Route::get('/banking/details/{order_id}', 'DetailsController@banking_details') ;
 Route::get('/received/payment/{order_id}', 'DetailsController@received_payment') ;
 Route::get('/send/payment/{order_id}', 'DetailsController@send_payment') ;
 Route::get('/drop/order/{order_id}', 'DetailsController@drop_order') ;

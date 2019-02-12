@@ -10,7 +10,6 @@
 
         	<div class="row">
         		<div class="col-md-6 offset-md-3">
-                    @if ( $order->status == 0 )
         			<div class="table-responsive">
         				<table class="table table-hover">
         					<thead>
@@ -43,27 +42,8 @@
         							<td>R {{ $order->amount }}</td>
         						</tr>
         					</tbody>
-        					<tfoot>
-        						<th colspan="2" class="text-center">
-        							<form method="POST" action="{{ url( '/member/details' ) }}">
-                						@csrf
-                						<input type="hidden" name="order_id" value="{{ $order->id }}">
-                						<input type="hidden" name="user_id" value="{{ $order->user_id }}">
-										<button type="submit" class="btn btn-success">Reserve</button>
-									</form>
-        						</th>
-        					</tfoot>
         				</table>
         			</div>
-                    @else
-                    <div class="alert alert-success p-5">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                        Order already reserved.
-                        <br>
-                        
-                    </div>
-                    <a href="{{ url('/home') }}" class="btn btn-warning">Try other order</a>
-                    @endif
         		</div>
         	</div>
 

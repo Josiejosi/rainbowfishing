@@ -25,11 +25,15 @@
                                             <td>R {{ $order->amount }}</td>
                                             <td>
                                                 @if ( $order->status == 1 )
-                                                <a type="button" class="btn btn-primary btn-sm" href="{{ url('/send/payment') }}/{{ $order->id }}">
-                                                    <i class="fas fa-fish"></i> Confirm Sending
+                                                <a href="{{ url( '/banking/details/' ) }}/{{ $order->id }}" class="btn btn-info btn-sm">Member Details</a>
+                                                <a  class="btn btn-success btn-sm" href="{{ url('/send/payment') }}/{{ $order->id }}">
+                                                    Confirm Sending
+                                                </a>
+                                                <a class="btn btn-danger btn-sm" href="{{ url('/drop/order') }}/{{ $order->id }}">
+                                                    Drop Order
                                                 </a>
                                                 @elseif ( $order->status == 2 )
-                                                	<span class="badge badge-info">Awaiting Approval</span>
+                                                    <span class="badge badge-info">Awaiting Approval</span>
                                                 @elseif ( $order->status == 3 )
 
                                                     <span class="badge badge-info">Received</span>

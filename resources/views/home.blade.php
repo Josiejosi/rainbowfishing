@@ -150,10 +150,11 @@
                                             <td>R {{ $order->amount }}</td>
                                             <td>
                                                 @if ( $order->status == 1 )
-                                                <a type="button" class="btn btn-success" href="{{ url('/send/payment') }}/{{ $order->id }}">
+                                                <a href="{{ url( '/banking/details/' ) }}/{{ $order->id }}" class="btn btn-info btn-sm">Member Details</a>
+                                                <a  class="btn btn-success btn-sm" href="{{ url('/send/payment') }}/{{ $order->id }}">
                                                     Confirm Sending
                                                 </a>
-                                                <a type="button" class="btn btn-danger" href="{{ url('/drop/order') }}/{{ $order->id }}">
+                                                <a class="btn btn-danger btn-sm" href="{{ url('/drop/order') }}/{{ $order->id }}">
                                                     Drop Order
                                                 </a>
                                                 @elseif ( $order->status == 2 )

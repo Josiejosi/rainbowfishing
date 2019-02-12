@@ -17,9 +17,16 @@ class DetailsController extends Controller
 
     public function index($order_id) {
 
+        $order = Orders::find( $order_id ) ;
+
+        return view( 'details', [ 'order' => $order ] ) ;
+    }    
+
+    public function banking_details($order_id) {
+
     	$order = Orders::find( $order_id ) ;
 
-    	return view( 'details', [ 'order' => $order ] ) ;
+    	return view( 'banking_details', [ 'order' => $order ] ) ;
     }
 
     
@@ -27,12 +34,20 @@ class DetailsController extends Controller
 
         $order = Orders::find( $request->order_id ) ;
 
-        $order->update( [ 'status' => '1', 'sender_id' => auth()->user()->id, 'block_at' => Carbon::now()->addHours(6) ] ) ;
+        if ( $order->status == 0 ) {
 
-        Notifications::create( "You reserved Order: RF00" . $request->order_id . ", Please make a payment in the next 3 hours.", $request->user_id ) ;
-        Notifications::create( "Your  Order: RF00" . $request->order_id . ", was reserved.", auth()->user()->id ) ;
+            $order->update( [ 'status' => '1', 'sender_id' => auth()->user()->id, 'block_at' => Carbon::now()->addHours(6) ] ) ;
 
-        flash( "You reserved <b>'Order: RF00" . $request->order_id . "'</b>, Please make a payment in the next 3 hours."  )->success() ;
+            Notifications::create( "You reserved Order: RF00" . $request->order_id . ", Please make a payment in the next 3 hours.", $request->user_id ) ;
+            Notifications::create( "Your  Order: RF00" . $request->order_id . ", was reserved.", auth()->user()->id ) ;
+
+            flash( "You reserved <b>'Order: RF00" . $request->order_id . "'</b>, Please make a payment in the next 3 hours."  )->success() ;
+
+        } else {
+
+            flash( "Member already reserved."  )->success() ;
+
+        }
 
         return redirect( '/home' ) ;
 

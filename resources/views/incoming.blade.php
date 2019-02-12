@@ -25,10 +25,10 @@
                                             <td>
                                                 @if ( $order->status == 1 )
 
-                                                	<span class="badge badge-info">Reserved</span>
+                                                    <span class="badge badge-info">Reserved</span>
 
                                                 @elseif ( $order->status == 2 )
-                                                <a type="button" class="btn btn-primary btn-sm" href="{{ url('/received/payment') }}/{{ $order->id }}">
+                                                <a type="button" class="btn btn-success" href="{{ url('/received/payment') }}/{{ $order->id }}">
                                                     Confirm Received
                                                 </a>
                                                 @elseif ( $order->status == 3 )
