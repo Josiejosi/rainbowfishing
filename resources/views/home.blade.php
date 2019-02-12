@@ -211,8 +211,8 @@
                                                     <span class="badge badge-info">Reserved</span>
 
                                                 @elseif ( $order->status == 2 )
-                                                <a type="button" class="btn btn-success" href="{{ url('/received/payment') }}/{{ $order->id }}">
-                                                    Confirm Received
+                                                <a class="btn btn-success" href="{{ url('/received/payment') }}/{{ $order->id }}">
+                                                    Confirm Receiving
                                                 </a>
                                                 @elseif ( $order->status == 3 )
 
