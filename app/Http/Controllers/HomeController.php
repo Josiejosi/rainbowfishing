@@ -63,8 +63,8 @@ class HomeController extends Controller {
 
     private function list_hour() {
 
-        $early_list                 = false ;
-        $late_list                  = false ;
+        $early_list                 = true ;
+        $late_list                  = true ;
 
         $timezone                   = 'Africa/Johannesburg' ;
 
