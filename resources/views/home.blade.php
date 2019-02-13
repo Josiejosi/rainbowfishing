@@ -86,7 +86,7 @@
 
                                     <tr>
                                         <td>RF00{{ $order->id }}</td>
-                                        <td>{{ $order->user->account->bank }}</td>
+                                        <td>{{ isset( $order->user->account->bank ) ? $order->user->account->bank : 'Not set' }}</td>
                                         <td>R {{ $order->amount }}</td>
                                         <td>
                                             @if ( $linked_account )
