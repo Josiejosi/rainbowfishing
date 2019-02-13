@@ -63,13 +63,13 @@ class HomeController extends Controller {
 
     private function list_hour() {
 
-        $early_list                 = true ;
-        $late_list                  = true ;
+        $early_list                 = false ;
+        $late_list                  = false ;
 
         $timezone                   = 'Africa/Johannesburg' ;
 
-        $today_twelve               = Carbon::parse('today 12pm', $timezone) ;
-        $today_one                  = Carbon::parse('today 1pm', $timezone) ;
+        $today_twelve               = Carbon::parse('today 3pm', $timezone) ;
+        $today_one                  = Carbon::parse('today 4pm', $timezone) ;
 
         $today_eight                = Carbon::parse('today 8pm', $timezone) ;
         $today_nine                 = Carbon::parse('today 9pm', $timezone) ;
