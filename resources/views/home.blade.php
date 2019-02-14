@@ -50,7 +50,13 @@
                 </div>
             @endif
 
+            @if ( auth()->user()->account == null )
+                <div class="alert alert-warning p-4 text-center" role="alert">
+                    Link your banking account:
+                   <a class="btn btn-primary btn-lg" href="{{ url('/account') }}">Link Account</a> 
 
+                </div>
+            @endif
             <div class="alert alert-info p-4 text-center" id="first_slot" role="alert"></div>
             <div class="alert alert-info p-4 text-center" id="second_slot" role="alert"></div>
 
@@ -237,7 +243,6 @@
         if(event.offset.weeks > 0) {
             format = '%-w week%!w ' + format;
         }
-        var amount = {{ $order->amount }} ;
 
         $( this ).html( event.strftime( '<h4 class="text-center">' + format + ' Remaining to fish on first slot</h4>' ) );
 
@@ -255,7 +260,6 @@
         if(event.offset.weeks > 0) {
             format = '%-w week%!w ' + format;
         }
-        var amount = {{ $order->amount }} ;
 
         $( this ).html( event.strftime( '<h4 class="text-center">' + format + ' Remaining to fish on second slot</h4>' ) );
 
