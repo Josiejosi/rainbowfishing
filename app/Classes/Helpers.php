@@ -31,7 +31,7 @@
 	        $early_list                 = false ;
 	        $late_list                  = false ;
 
-	        $twelve_string 				= '12pmm' ;
+	        $twelve_string 				= '12pm' ;
 	        $one_string 				= '1pm' ;
 
 	        $eight_string 				= '8pm' ;

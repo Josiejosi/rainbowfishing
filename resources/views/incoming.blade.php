@@ -41,11 +41,35 @@
 
                                     @endforeach
 
-                                @else
+                                @endif
 
-                                    <tr>
-                                        <td colspan="3">Nothing yet</td>
-                                    </tr>
+                                @if ( count( $incoming_split ) )
+
+                                    @foreach( $incoming_split as $order )
+                                        <?php 
+                                            $user = \App\User::find($order->receiver_id) ;
+                                        ?>
+                                        <tr>
+                                            <td>{{ $user->account->bank }}</td>
+                                            <td>R {{ $order->amount }}</td>
+                                            <td>
+                                                @if ( $order->status == 1 )
+
+                                                    <span class="badge badge-info">Reserved</span>
+
+                                                @elseif ( $order->status == 2 )
+                                                <a class="btn btn-success" href="{{ url('/split/received/payment') }}/{{ $order->id }}">
+                                                    Confirm Receiving
+                                                </a>
+                                                @elseif ( $order->status == 3 )
+
+                                                    <span class="badge badge-info">Received</span>
+
+                                                @endif
+                                            </td>
+                                        </tr>
+
+                                    @endforeach
 
                                 @endif
 
