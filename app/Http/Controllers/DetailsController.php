@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\User ;
+use App\Split ;
 use App\Orders ;
 
 use Carbon\Carbon ;
@@ -32,21 +33,89 @@ class DetailsController extends Controller
     
     public function reserve_member( Request $request) {
 
-        $order = Orders::find( $request->order_id ) ;
+        $block_hours                        = 6 ;
 
-        if ( $order->status == 0 ) {
+        $order                              = Orders::find( $request->order_id ) ;
 
-            $order->update( [ 'status' => '1', 'sender_id' => auth()->user()->id, 'block_at' => Carbon::now()->addHours(6) ] ) ;
+        if ( $request->amount < 50 ) {
 
-            Notifications::create( "You reserved Order: RF00" . $request->order_id . ", Please make a payment in the next 3 hours.", $request->user_id ) ;
-            Notifications::create( "Your  Order: RF00" . $request->order_id . ", was reserved.", auth()->user()->id ) ;
+            flash( "Please provide amounts between 50 and " . $order->amount )->error() ;
+            return redirect()->back() ;
+            
+        }
 
-            flash( "You reserved <b>'Order: RF00" . $request->order_id . "'</b>, Please make a payment in the next 3 hours."  )->success() ;
+        if ( $request->amount > 2000 ) {
 
-        } else {
+            flash( "Please provide amounts between R 50 and R 2000" )->error() ;
+            return redirect()->back() ;
 
-            flash( "Member already reserved."  )->success() ;
+        }
 
+        if ( $request->amount > $order->amount ) {
+
+            flash( "Please provide amounts between R 50 and R " . $order->amount  )->error() ;
+            return redirect()->back() ;
+
+        }
+
+        if ( $request->amount < $order->amount ) {
+            
+            if ( $request->amount >= 50 || $request->amount <= 2000 ) {
+
+
+                $new_order_amount       = $order->amount - $request->amount ;
+
+                if ( $new_order_amount > 50 ) {
+
+                    $order->update( [ 'amount' => $new_order_amount, 'sender_id' => auth()->user()->id, ] ) ;
+
+                    Split::create([
+
+                        'status'        => 1, 
+                        'amount'        => $request->amount, 
+                        'receiver_id'   => $order->user_id , 
+                        'sender_id'     => auth()->user()->id, 
+                        'order_id'      => $order->id, 
+                        'is_matured'    => 1, 
+                        'matures_at'    => '', 
+                        'block_at'      => Carbon::now()->addHours($block_hours),
+                        
+                    ]) ;
+                    
+                } else {
+
+                    flash( "Remaining amount from split must be greater than R 50, You trying to leave R " . $new_order_amount )->error() ;
+                    return redirect()->back() ;  
+
+                }
+
+                dump('Add to split: ' . $new_order_amount ) ;
+
+            } else {
+
+                flash( "Split amount must be between R 50 and R 2000" )->error() ;
+                return redirect()->back() ;
+
+            }
+
+        }
+
+        if ( $order->amount == $request->amount ) {
+
+            if ( $order->status == 0 ) {
+
+                $order->update( [ 'status' => '1', 'sender_id' => auth()->user()->id, 'block_at' => Carbon::now()->addHours($block_hours) ] ) ;
+
+                Notifications::create( "You reserved Order: RF00" . $request->order_id . ", Please make a payment in the next 3 hours.", $request->user_id ) ;
+                Notifications::create( "Your  Order: RF00" . $request->order_id . ", was reserved.", auth()->user()->id ) ;
+
+                flash( "You reserved <b>'Order: RF00" . $request->order_id . "'</b>, Please make a payment in the next 3 hours."  )->success() ;
+
+            } else {
+
+                flash( "Member already reserved."  )->success() ;
+
+            }
         }
 
         return redirect( '/home' ) ;
@@ -71,23 +140,57 @@ class DetailsController extends Controller
 
     public function received_payment( $order_id ) {
 
-    	$order = Orders::find( $order_id ) ;
+        $maurity_time                  = 5 ;
+
+    	$order                         = Orders::find( $order_id ) ;
 
     	$order->update( [ 'status' => '3' ] ) ;
 
-    	$new_amount 				= round( $order->amount + ( $order->amount / 30 ) ) ;
+    	$new_amount 				   = round( $order->amount + ( $order->amount / 30 ) ) ;
 
-    	$new_order 					= Orders::create([
+        if ( $new_amount > 2000 ) {
+ 
+            $new_order                  = Orders::create([
 
-    		'status'				=> 0, 
-    		'amount'				=> $new_amount, 
-    		'user_id'				=> $order->sender_id, 
-    		'sender_id' 			=> 0, 
-    		'is_matured' 			=> 1, 
-            'matures_at'            => Carbon::now()->addHours(5),
-    		'block_at' 			    => null,
+                'status'                => 0, 
+                'amount'                => 2000, 
+                'user_id'               => $order->sender_id, 
+                'sender_id'             => 0, 
+                'is_matured'            => 1, 
+                'matures_at'            => Carbon::now()->addHours( $maurity_time ),
+                'block_at'              => null,
 
-    	]) ;
+            ]) ;
+
+            $remaining_amount           = $new_amount - 2000 ;
+
+            $new_order                  = Orders::create([
+
+                'status'                => 0, 
+                'amount'                => $remaining_amount, 
+                'user_id'               => $order->sender_id, 
+                'sender_id'             => 0, 
+                'is_matured'            => 1, 
+                'matures_at'            => Carbon::now()->addHours( $maurity_time ),
+                'block_at'              => null,
+
+            ]) ;
+
+        } else {
+
+        	$new_order 					= Orders::create([
+
+        		'status'				=> 0, 
+        		'amount'				=> $new_amount, 
+        		'user_id'				=> $order->sender_id, 
+        		'sender_id' 			=> 0, 
+        		'is_matured' 			=> 1, 
+                'matures_at'            => Carbon::now()->addHours( $maurity_time ),
+        		'block_at' 			    => null,
+
+        	]) ;
+
+        }
 
     	Notifications::create( "Order approved.", $order->sender_id ) ;
     	Notifications::create( "Your just confirmed receiving.", auth()->user()->id ) ;

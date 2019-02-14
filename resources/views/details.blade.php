@@ -38,6 +38,10 @@
         							<td>Branch Code:</td>
         							<td>{{ isset( $order->user->account->branch_code  ) ? $order->user->account->branch_code : '' }}</td>
         						</tr>
+                                <tr>
+                                    <td>Min: R 50.00</td>
+                                    <td>Max: R 2000</td>
+                                </tr>
         						<tr>
         							<td>Amount:</td>
         							<td>R {{ $order->amount }}</td>
@@ -47,6 +51,9 @@
         						<th colspan="2" class="text-center">
         							<form method="POST" action="{{ url( '/member/details' ) }}">
                 						@csrf
+                                        <div class="form-group row">
+                                            <input type="text" name="amount" id="amount" class="form-control" value="{{ $order->amount }}">
+                                        </div>
                 						<input type="hidden" name="order_id" value="{{ $order->id }}">
                 						<input type="hidden" name="user_id" value="{{ $order->user_id }}">
 										<button type="submit" class="btn btn-success">Reserve</button>

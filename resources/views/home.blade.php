@@ -242,7 +242,7 @@
         $( this ).html( event.strftime( '<h4 class="text-center">' + format + ' Remaining to fish on first slot</h4>' ) );
 
     }).on('finish.countdown', function(event) {
-        $(this).html('<a class="btn btn-primary btn-block btn-lg" href="{{ url('/fish') }}" role="button"><i class="fas fa-fish"></i> Start Fishing</a>') ;
+        $(this).html('<a class="btn btn-primary btn-block btn-lg" href="{{ url('/fish') }}"><i class="fas fa-fish"></i> Start Fishing</a>') ;
     }) ; 
 
     $( '#second_slot' ).countdown( '{{ $list_hour["today_eight"] }}' ).on('update.countdown', function(event) {
@@ -260,7 +260,7 @@
         $( this ).html( event.strftime( '<h4 class="text-center">' + format + ' Remaining to fish on second slot</h4>' ) );
 
     }).on('finish.countdown', function(event) {
-        $(this).html('<a class="btn btn-primary btn-block btn-lg" href="{{ url('/fish') }}" role="button"><i class="fas fa-fish"></i> Start Fishing</a>') ;
+        $(this).html('<a class="btn btn-primary btn-block btn-lg" href="{{ url('/fish') }}"><i class="fas fa-fish"></i> Start Fishing</a>') ;
     }) ;  
 
 </script>
