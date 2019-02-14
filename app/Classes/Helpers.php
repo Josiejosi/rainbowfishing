@@ -31,8 +31,8 @@
 	        $early_list                 = false ;
 	        $late_list                  = false ;
 
-	        $twelve_string 				= '10am' ;
-	        $one_string 				= '12pm' ;
+	        $twelve_string 				= '12pmm' ;
+	        $one_string 				= '1pm' ;
 
 	        $eight_string 				= '8pm' ;
 	        $nine_string 				= '9pm' ;
