@@ -8,6 +8,7 @@ use Carbon\Carbon ;
 
 use App\Orders ;
 use App\User ;
+use App\Split ;
 
 use App\Classes\Helpers ;
 
@@ -43,6 +44,18 @@ class HomeController extends Controller {
                                              ->take(5)
                                              ->get() ;
 
+        $outgoing_split             = Split::where( 'sender_id', auth()->user()->id )
+                                            ->where( 'status','<>', 0 )
+                                            ->orderBy('updated_at', 'desc')
+                                            ->take(5)
+                                            ->get() ;
+
+        $incoming_split             = Split::where( 'receiver_id', auth()->user()->id )
+                                             ->where( 'status','<>', 0 )
+                                             ->orderBy('updated_at', 'desc')
+                                             ->take(5)
+                                             ->get() ;
+
         $outgoing_amount            = Orders::where( 'sender_id', auth()->user()->id )->where( 'status', 3 )->get()->sum('amount') ;
         $incoming_amount            = Orders::where( 'user_id', auth()->user()->id )->where( 'status', 3 )->get()->sum('amount') ;
 
@@ -52,7 +65,10 @@ class HomeController extends Controller {
             'linked_account'        => $linked_account,  
             'orders'                => $orders, 
             'outgoing'              => $outgoing, 
-            'incoming'              => $incoming, 
+            'incoming'              => $incoming,  
+
+            'outgoing_split'        => $outgoing_split, 
+            'incoming_split'        => $incoming_split, 
 
             'outgoing_amount'       => $outgoing_amount,
             'incoming_amount'       => $incoming_amount, 

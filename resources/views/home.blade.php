@@ -123,11 +123,39 @@
 
                                     @endforeach
 
-                                @else
+                                @endif
 
-                                    <tr>
-                                        <td colspan="3">Nothing yet</td>
-                                    </tr>
+                                @if ( count( $outgoing_split ) )
+
+                                    @foreach( $outgoing_split as $order )
+
+                                        <?php 
+                                            $user = \App\User::find($order->receiver_id) ;
+                                        ?>
+
+                                        <tr>
+                                            <td>{{ $user->account->bank }}</td>
+                                            <td>R {{ $order->amount }}</td>
+                                            <td>
+                                                @if ( $order->status == 1 )
+                                                <a href="{{ url( '/banking/details/' ) }}/{{ $order->id }}" class="btn btn-info btn-sm">Member Details</a>
+                                                <a  class="btn btn-success btn-sm" href="{{ url('/split/send/payment') }}/{{ $order->id }}">
+                                                    Confirm Sending
+                                                </a>
+                                                <a class="btn btn-danger btn-sm" href="{{ url('/split/drop/order') }}/{{ $order->id }}">
+                                                    Drop Order
+                                                </a>
+                                                @elseif ( $order->status == 2 )
+                                                    <span class="badge badge-info">Awaiting Approval</span>
+                                                @elseif ( $order->status == 3 )
+
+                                                    <span class="badge badge-info">Received</span>
+
+                                                @endif
+                                            </td>
+                                        </tr>
+
+                                    @endforeach
 
                                 @endif
 
@@ -178,14 +206,36 @@
 
                                     @endforeach
 
-                                @else
+                                @endif
+                                @if ( count( $incoming_split ) )
 
-                                    <tr>
-                                        <td colspan="3">Nothing yet</td>
-                                    </tr>
+                                    @foreach( $incoming_split as $order )
+                                        <?php 
+                                            $user = \App\User::find($order->receiver_id) ;
+                                        ?>
+                                        <tr>
+                                            <td>{{ $user->account->bank }}</td>
+                                            <td>R {{ $order->amount }}</td>
+                                            <td>
+                                                @if ( $order->status == 1 )
+
+                                                    <span class="badge badge-info">Reserved</span>
+
+                                                @elseif ( $order->status == 2 )
+                                                <a class="btn btn-success" href="{{ url('/split/received/payment') }}/{{ $order->id }}">
+                                                    Confirm Receiving
+                                                </a>
+                                                @elseif ( $order->status == 3 )
+
+                                                    <span class="badge badge-info">Received</span>
+
+                                                @endif
+                                            </td>
+                                        </tr>
+
+                                    @endforeach
 
                                 @endif
-
                             </tbody>
                         </table>
                     </div>

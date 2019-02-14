@@ -52,6 +52,8 @@
 	    
 		public static function getAllNotifications( $user_id ) {
 
+			 //Notification::where( 'user_id', $user_id )->update( [ 'is_viewed', 1 ] ) ;
+
 			return Notification::where( 'user_id', $user_id )->get() ;
 
 		}

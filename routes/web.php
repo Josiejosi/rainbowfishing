@@ -26,6 +26,14 @@ Route::post('/member/details', 'DetailsController@reserve_member') ;
 Route::get('/password', 'ProfileController@index')->name('password')  ;
 Route::post('/password/update', 'ProfileController@password_update') ;
 
+//SPLIT URL's
+//
+Route::get('/split/received/payment/{order_id}', 'SplitController@split_received_payment') ;
+Route::get('/split/send/payment/{order_id}', 'SplitController@split_send_payment') ;
+Route::get('/split/drop/order/{order_id}', 'SplitController@split_drop_payment') ;
+//
+//END OF SPLIT URL's
+
 Route::get('/account', 'AccountController@index')->name('account')  ;
 Route::post('/account/update', 'AccountController@account_update') ;
 

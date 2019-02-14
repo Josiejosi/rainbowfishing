@@ -58,6 +58,8 @@ class DetailsController extends Controller
 
         }
 
+       // dd( $request->amount < $order->amount ) ;
+
         if ( $request->amount < $order->amount ) {
             
             if ( $request->amount >= 50 || $request->amount <= 2000 ) {
@@ -77,7 +79,7 @@ class DetailsController extends Controller
                         'sender_id'     => auth()->user()->id, 
                         'order_id'      => $order->id, 
                         'is_matured'    => 1, 
-                        'matures_at'    => '', 
+                        'matures_at'    => Carbon::now()->addHours($block_hours), 
                         'block_at'      => Carbon::now()->addHours($block_hours),
                         
                     ]) ;
@@ -88,8 +90,6 @@ class DetailsController extends Controller
                     return redirect()->back() ;  
 
                 }
-
-                dump('Add to split: ' . $new_order_amount ) ;
 
             } else {
 
@@ -106,10 +106,10 @@ class DetailsController extends Controller
 
                 $order->update( [ 'status' => '1', 'sender_id' => auth()->user()->id, 'block_at' => Carbon::now()->addHours($block_hours) ] ) ;
 
-                Notifications::create( "You reserved Order: RF00" . $request->order_id . ", Please make a payment in the next 3 hours.", $request->user_id ) ;
+                Notifications::create( "You reserved Order: RF00" . $request->order_id . ", Please make a payment in the next 6 hours.", $request->user_id ) ;
                 Notifications::create( "Your  Order: RF00" . $request->order_id . ", was reserved.", auth()->user()->id ) ;
 
-                flash( "You reserved <b>'Order: RF00" . $request->order_id . "'</b>, Please make a payment in the next 3 hours."  )->success() ;
+                flash( "You reserved <b>'Order: RF00" . $request->order_id . "'</b>, Please make a payment in the next 6 hours."  )->success() ;
 
             } else {
 
@@ -167,7 +167,7 @@ class DetailsController extends Controller
             $new_order                  = Orders::create([
 
                 'status'                => 0, 
-                'amount'                => $remaining_amount, 
+                'amount'                => 600, 
                 'user_id'               => $order->sender_id, 
                 'sender_id'             => 0, 
                 'is_matured'            => 1, 
