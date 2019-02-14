@@ -294,7 +294,7 @@
             format = '%-w week%!w ' + format;
         }
 
-        $( this ).html( event.strftime( '<h4 class="text-center">' + format + ' Remaining to fish on first slot</h4>' ) );
+        $( this ).html( event.strftime( '<h4 class="text-center">' + format + ' Remaining to fish on the early slot</h4>' ) );
 
     }).on('finish.countdown', function(event) {
         $(this).html('<a class="btn btn-primary btn-block btn-lg" href="{{ url('/fish') }}"><i class="fas fa-fish"></i> Start Fishing</a>') ;
@@ -311,7 +311,7 @@
             format = '%-w week%!w ' + format;
         }
 
-        $( this ).html( event.strftime( '<h4 class="text-center">' + format + ' Remaining to fish on second slot</h4>' ) );
+        $( this ).html( event.strftime( '<h4 class="text-center">' + format + ' Remaining to fish on the night slot</h4>' ) );
 
     }).on('finish.countdown', function(event) {
         $(this).html('<a class="btn btn-primary btn-block btn-lg" href="{{ url('/fish') }}"><i class="fas fa-fish"></i> Start Fishing</a>') ;
