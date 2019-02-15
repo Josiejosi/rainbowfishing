@@ -18,13 +18,13 @@ class SplitController extends Controller
 
     public function split_received_payment($order_id) {
 
-        $maurity_time                  = 5 ;
+        $maurity_time                  = 24 ;
 
     	$order                         = Split::find( $order_id ) ;
 
     	$order->update( [ 'status' => '3' ] ) ;
 
-    	$new_amount 				   = round( $order->amount + ( $order->amount / 30 ) ) ;
+    	$new_amount 				   = round( $order->amount + ( ( $order->amount * 30 ) /100 ) ) ;
 
         if ( $new_amount > 2000 ) {
  

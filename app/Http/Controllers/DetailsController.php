@@ -140,13 +140,13 @@ class DetailsController extends Controller
 
     public function received_payment( $order_id ) {
 
-        $maurity_time                  = 5 ;
+        $maurity_time                  = 24 ;
 
     	$order                         = Orders::find( $order_id ) ;
 
     	$order->update( [ 'status' => '3' ] ) ;
 
-    	$new_amount 				   = round( $order->amount + ( $order->amount / 30 ) ) ;
+    	$new_amount 				   = round( $order->amount + ( ( $order->amount * 30 ) / 100 ) ) ;
 
         if ( $new_amount > 2000 ) {
  
@@ -167,7 +167,7 @@ class DetailsController extends Controller
             $new_order                  = Orders::create([
 
                 'status'                => 0, 
-                'amount'                => 600, 
+                'amount'                => $remaining_amount, 
                 'user_id'               => $order->sender_id, 
                 'sender_id'             => 0, 
                 'is_matured'            => 1, 

@@ -39,8 +39,8 @@
 
 	        $timezone                   = 'Africa/Johannesburg' ;
 
-	        $today_twelve               = Carbon::parse( 'tomorrow ' . $twelve_string, $timezone ) ;
-	        $today_one                  = Carbon::parse( 'tomorrow ' . $one_string, $timezone ) ;
+	        $today_twelve               = Carbon::parse( 'today ' . $twelve_string, $timezone ) ;
+	        $today_one                  = Carbon::parse( 'today ' . $one_string, $timezone ) ;
 
 	        $today_eight                = Carbon::parse( 'today ' . $eight_string, $timezone ) ;
 	        $today_nine                 = Carbon::parse( 'today ' . $nine_string, $timezone ) ;
@@ -67,10 +67,10 @@
 
 	        //determate if is next list.
 	        //
-/*	        if ( $now->gte($today_one) ) {
+	        if ( $now->gte($today_one) ) {
 		        $today_twelve           = Carbon::parse( 'tomorrow ' . $twelve_string, $timezone ) ;
 		        $today_one              = Carbon::parse( 'tomorrow ' . $one_string, $timezone ) ;	        	
-	        }*/
+	        }
 
 	        if ( $now->gte($today_nine) ) {
 		        $today_eight           	= Carbon::parse( 'tomorrow ' . $eight_string, $timezone ) ;
