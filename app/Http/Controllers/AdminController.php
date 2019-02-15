@@ -42,8 +42,8 @@ class AdminController extends Controller
 
     public function ph() {
 
-        $outgoing                   = Orders::where( 'matures_at', '<', Carbon::now() )->where( 'status', 0 )->orderBy('id', 'desc')->get() ;
-        $outgoing_split             = Split::where( 'matures_at', '<', Carbon::now() )->where( 'status', 0 )->orderBy('id', 'desc')->get() ;
+        $outgoing                   = Orders::where( 'matures_at', '<', Carbon::now() )->where( 'status','<>', 0 )->orderBy('id', 'desc')->get() ;
+        $outgoing_split             = Split::where( 'matures_at', '<', Carbon::now() )->where( 'status', '<>', 0 )->orderBy('id', 'desc')->get() ;
 
         return view( 'ph', [
 
