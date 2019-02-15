@@ -17,7 +17,12 @@ class SplitController extends Controller
     public function __construct() { $this->middleware( 'auth' ) ; }
 
     public function split_banking_details($order_id) {
+
+
         $order = Split::find( $order_id ) ;
+
+        dump($order) ;
+        dump($order_id) ;
 
         return view( 'banking_details', [ 'order' => $order ] ) ;
     }
