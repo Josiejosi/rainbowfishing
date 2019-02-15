@@ -13,6 +13,7 @@
                     <thead>
                         <tr>
                             <th>Ord#</th>
+                            <th>Name</th>
                             <th>Bank</th>
                             <th>Amt</th>
                         </tr>
@@ -25,6 +26,7 @@
 
                                 <tr>
                                     <td>RF00{{ $order->id }}</td>
+                                    <td>{{ isset( $order->user->name ) ? $order->user->name : 'Not set' }}</td>
                                     <td>{{ isset( $order->user->account->bank ) ? $order->user->account->bank : 'Not set' }}</td>
                                     <td>R {{ $order->amount }}</td>
                                 </tr>

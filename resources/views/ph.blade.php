@@ -31,8 +31,8 @@
 
                                 <tr>
                                     <td>RF00{{ $order->id }}</td>
-                                    <td>{{ $order->user->name }}</td>
-                                    <td>{{ $sender->name }}</td>
+                                    <td>{{ isset( $order->user->name ) ? $order->user->name : '' }}</td>
+                                    <td>{{ isset( $sender->name ) ? $sender->name : '' }}</td>
                                     <td>R {{ $order->amount }}</td>
                                     <td>
                                         <span class="badge badge-info">Reserved</span>
@@ -72,8 +72,8 @@
 
                                 <tr>
                                     <td>RF00{{ $order->id }}</td>
-                                    <td>{{ $sender->name }}</td>
-                                    <td>{{ $receiver->name }}</td>
+                                    <td>{{ isset( $sender->name ) ? $sender->name : '' }}</td>
+                                    <td>{{ isset( $receiver->name ) ? $receiver->name : '' }}</td>
                                     <td>R {{ $order->amount }}</td>
                                     <td>
                                         <span class="badge badge-info">Reserved</span>
