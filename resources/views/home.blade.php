@@ -153,7 +153,7 @@
                                                     <span class="badge badge-info">Received</span>
 
                                                 @endif
-                                                <a href="{{ url( '/banking/details/' ) }}/{{ $order->id }}" class="btn btn-info btn-sm">
+                                                <a href="{{ url( '/split/banking/details/' ) }}/{{ $order->id }}" class="btn btn-info btn-sm">
                                                     Member Details
                                                 </a>
                                             </td>

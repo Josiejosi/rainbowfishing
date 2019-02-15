@@ -16,9 +16,15 @@ class SplitController extends Controller
 {
     public function __construct() { $this->middleware( 'auth' ) ; }
 
+    public function split_banking_details($order_id) {
+        $order = Split::find( $order_id ) ;
+
+        return view( 'banking_details', [ 'order' => $order ] ) ;
+    }
+
     public function split_received_payment($order_id) {
 
-        $maurity_time                  = 24 ;
+        $maurity_time                  = 5 ;
 
     	$order                         = Split::find( $order_id ) ;
 
