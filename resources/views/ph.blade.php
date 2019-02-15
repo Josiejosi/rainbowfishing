@@ -76,9 +76,9 @@
                                     <td>{{ isset( $receiver->name ) ? $receiver->name : '' }}</td>
                                     <td>R {{ $order->amount }}</td>
                                     <td>
-                                        <span class="badge badge-info">Reserved</span>
+                                        
                                         @if ( $order->status == 1 )
-
+                                            <span class="badge badge-info">Reserved</span>
                                         @elseif ( $order->status == 2 )
                                             <span class="badge badge-info">Awaiting Approval</span>
                                         @elseif ( $order->status == 3 )
