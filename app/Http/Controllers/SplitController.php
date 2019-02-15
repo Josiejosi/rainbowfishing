@@ -18,13 +18,9 @@ class SplitController extends Controller
 
     public function split_banking_details($order_id) {
 
-
         $order = Split::find( $order_id ) ;
 
-        dump($order) ;
-        dump($order_id) ;
-
-        return view( 'banking_details', [ 'order' => $order ] ) ;
+        return view( 'split_banking_details', [ 'order' => $order ] ) ;
     }
 
     public function split_received_payment($order_id) {
