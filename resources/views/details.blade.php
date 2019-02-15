@@ -19,6 +19,11 @@
         					<tbody>
 
                                 <tr>
+                                    <td>User's Name:</td>
+                                    <td>{{ isset( $order->user->name ) ? $order->user->name : 'Not set' }}</td>
+                                </tr>
+
+                                <tr>
                                     <td>Phone Number:</td>
                                     <td>{{ isset( $order->user->phone_number ) ? $order->user->phone_number : 'Not set' }}</td>
                                 </tr>
@@ -40,7 +45,7 @@
         						</tr>
                                 <tr>
                                     <td>Min: R 50.00</td>
-                                    <td>Max: R 2000</td>
+                                    <td>Max: R 2000.00</td>
                                 </tr>
         						<tr>
         							<td>Amount:</td>

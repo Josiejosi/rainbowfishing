@@ -25,7 +25,6 @@
                                             <td>R {{ $order->amount }}</td>
                                             <td>
                                                 @if ( $order->status == 1 )
-                                                <a href="{{ url( '/banking/details/' ) }}/{{ $order->id }}" class="btn btn-info btn-sm">Member Details</a>
                                                 <a  class="btn btn-success btn-sm" href="{{ url('/send/payment') }}/{{ $order->id }}">
                                                     Confirm Sending
                                                 </a>
@@ -39,6 +38,9 @@
                                                     <span class="badge badge-info">Received</span>
 
                                                 @endif
+                                                <a href="{{ url( '/banking/details/' ) }}/{{ $order->id }}" class="btn btn-info btn-sm">
+                                                    Member Details
+                                                </a>
                                             </td>
                                         </tr>
 
@@ -59,7 +61,6 @@
                                             <td>R {{ $order->amount }}</td>
                                             <td>
                                                 @if ( $order->status == 1 )
-                                                <a href="{{ url( '/banking/details/' ) }}/{{ $order->id }}" class="btn btn-info btn-sm">Member Details</a>
                                                 <a  class="btn btn-success btn-sm" href="{{ url('/split/send/payment') }}/{{ $order->id }}">
                                                     Confirm Sending
                                                 </a>
@@ -69,10 +70,11 @@
                                                 @elseif ( $order->status == 2 )
                                                     <span class="badge badge-info">Awaiting Approval</span>
                                                 @elseif ( $order->status == 3 )
-
                                                     <span class="badge badge-info">Received</span>
-
                                                 @endif
+                                                <a href="{{ url( '/banking/details/' ) }}/{{ $order->id }}" class="btn btn-info btn-sm">
+                                                    Member Details
+                                                </a>
                                             </td>
                                         </tr>
 

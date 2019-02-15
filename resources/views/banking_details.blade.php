@@ -18,6 +18,11 @@
         					<tbody>
 
                                 <tr>
+                                    <td>User's Name:</td>
+                                    <td>{{ isset( $order->user->name ) ? $order->user->name : 'Not set' }}</td>
+                                </tr>
+
+                                <tr>
                                     <td>Phone Number:</td>
                                     <td>{{ isset( $order->user->phone_number ) ? $order->user->phone_number : 'Not set' }}</td>
                                 </tr>
