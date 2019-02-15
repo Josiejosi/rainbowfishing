@@ -72,8 +72,8 @@
 
                                 <tr>
                                     <td>RF00{{ $order->id }}</td>
-                                    <td>{{ isset( $sender->name ) ? $sender->name : '' }}</td>
                                     <td>{{ isset( $receiver->name ) ? $receiver->name : '' }}</td>
+                                    <td>{{ isset( $sender->name ) ? $sender->name : '' }}</td>
                                     <td>R {{ $order->amount }}</td>
                                     <td>
                                         
