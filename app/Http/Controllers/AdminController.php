@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 use App\User ;
+use App\Split ;
 use App\Orders ;
 use App\Classes\Helpers ;
 use App\Classes\Notifications ;
@@ -21,6 +22,35 @@ class AdminController extends Controller
     public function index() {
 
         return view( 'admins' ) ;
+
+    }
+
+    public function admin_upcoming() {
+
+        $orders                     = Orders::where( 'matures_at', '<', Carbon::now() )
+                                             ->where( 'status', 0 )
+                                             ->orderBy('matures_at', 'desc')->take(15)
+                                             ->get() ;
+
+        return view( 'admin_upcoming', [
+
+            'orders'                => $orders,
+
+        ]) ;
+
+    }
+
+    public function ph() {
+
+        $outgoing                   = Orders::where( 'matures_at', '<', Carbon::now() )->where( 'status', 0 )->orderBy('id', 'desc')->get() ;
+        $outgoing_split             = Split::where( 'matures_at', '<', Carbon::now() )->where( 'status', 0 )->orderBy('id', 'desc')->get() ;
+
+        return view( 'ph', [
+
+            'outgoing'              => $outgoing,
+            'outgoing_split'        => $outgoing_split,
+
+        ]) ;
 
     }
 
@@ -90,7 +120,7 @@ class AdminController extends Controller
 
         	Notifications::create( "New order for ".$user->name." was added successfully.", $user->id ) ;
 
-         	flash( 'Account created successfully.' )->success() ;
+         	flash( "New order for ".$user->name." was added successfully." )->success() ;
         } else {
         	flash('Problem create the admin account.')->error() ;
         }

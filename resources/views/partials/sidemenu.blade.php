@@ -60,15 +60,44 @@
                                 </a>
                                 <a href="{{ url( '/orders' ) }}" class="sidebar-item">
                                     <i class="fas fa-money-check-alt"></i>
-                                    <span class="align-middle">Admin Order</span>
+                                    <span class="align-middle">Add Admin Order</span>
                                 </a>
                                 <a href="{{ url( '/users' ) }}" class="sidebar-item">
                                     <i class="fas fa-user"></i>
                                     <span class="align-middle">Manage Users</span>
                                 </a>
+                                <a href="{{ url( '/ph' ) }}" class="sidebar-item">
+                                    <i class="fas fa-money-check-alt"></i>
+                                    <span class="align-middle">Manage Orders</span>
+                                </a>
+                                <a href="{{ url( '/admin/upcoming' ) }}" class="sidebar-item">
+                                    <i class="fas fa-money-check-alt"></i>
+                                    <span class="align-middle">Current List</span>
+                                </a>
                             </div>
                         </div>
 
+                        @endif
+
+                        @if ( auth()->user()->role == 3 )
+
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">Super Admin</h5>
+                            </div>
+                            <div class="sidebar-content">
+
+                                <a href="{{ url( '/admins' ) }}" class="sidebar-item">
+                                    <i class="fas fa-user"></i>
+                                    <span class="align-middle">New Super-Admin</span>
+                                </a>
+                                <a href="{{ url( '/orders' ) }}" class="sidebar-item">
+                                    <i class="fas fa-money-check-alt"></i>
+                                    <span class="align-middle">Add Super-Admin Order</span>
+                                </a>
+                            </div>
+                        </div>
+                        
                         @endif
 
                     </nav>

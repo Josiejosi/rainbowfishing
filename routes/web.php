@@ -61,3 +61,5 @@ Route::get('/users', 'AdminController@users')->name('users') ;
 Route::get('/user/block/{user_id}', 'AdminController@block_user') ;
 Route::get('/user/unblock/{user_id}', 'AdminController@unblock_user') ;
 Route::get('/user/activate/{user_id}', 'AdminController@activate_user') ;
+Route::get('/ph', 'AdminController@ph') ;
+Route::get('/admin/upcoming', 'AdminController@admin_upcoming') ;

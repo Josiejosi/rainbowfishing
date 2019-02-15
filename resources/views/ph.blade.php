@@ -10,7 +10,10 @@
             <div class="table-responsive">
                 <table class="table table-hover">
                     <thead>
-                        <th>Bank</th>
+                        <th>ORD#</th>
+                        <th>Receiver</th>
+                        <th>Sender</th>
+                        <th>Date</th>
                         <th>Amount</th>
                         <th><i class="fas fa-cogs"></i></th>
                     </thead>
@@ -20,26 +23,34 @@
 
                             @foreach( $outgoing as $order )
 
+                                <?php 
+
+                                    $sender = \App\User::find( $order->sender_id ) ;
+
+                                ?>
+
                                 <tr>
-                                    <td>{{ $order->user->account->bank }}</td>
+                                    <td>RF00{{ $order->id }}</td>
+                                    <td>{{ $order->user->name }}</td>
+                                    <td>{{ $sender->name }}</td>
                                     <td>R {{ $order->amount }}</td>
                                     <td>
+                                        <span class="badge badge-info">Reserved</span>
                                         @if ( $order->status == 1 )
-                                        <a  class="btn btn-success btn-sm" href="{{ url('/send/payment') }}/{{ $order->id }}">
-                                            Confirm Sending
-                                        </a>
-                                        <a class="btn btn-danger btn-sm" href="{{ url('/drop/order') }}/{{ $order->id }}">
-                                            Drop Order
-                                        </a>
+
                                         @elseif ( $order->status == 2 )
                                             <span class="badge badge-info">Awaiting Approval</span>
                                         @elseif ( $order->status == 3 )
-
                                             <span class="badge badge-info">Received</span>
-
                                         @endif
-                                        <a href="{{ url( '/banking/details/' ) }}/{{ $order->id }}" class="btn btn-info btn-sm">
-                                            Member Details
+                                        <a  class="btn btn-success btn-sm" href="{{ url('/send/payment') }}/{{ $order->id }}">
+                                            Confirm Sending
+                                        </a>
+                                        <a  class="btn btn-success btn-sm" href="{{ url('/received/payment') }}/{{ $order->id }}">
+                                            Confirm Received
+                                        </a>
+                                        <a class="btn btn-danger btn-sm" href="{{ url('/drop/order') }}/{{ $order->id }}">
+                                            Drop Order
                                         </a>
                                     </td>
                                 </tr>
@@ -53,27 +64,34 @@
                             @foreach( $outgoing_split as $order )
 
                                 <?php 
-                                    $user = \App\User::find($order->receiver_id) ;
+
+                                    $sender = \App\User::find( $order->sender_id ) ;
+                                    $receiver = \App\User::find( $order->receiver_id ) ;
+
                                 ?>
 
                                 <tr>
-                                    <td>{{ $user->account->bank }}</td>
+                                    <td>RF00{{ $order->id }}</td>
+                                    <td>{{ $sender->name }}</td>
+                                    <td>{{ $receiver->name }}</td>
                                     <td>R {{ $order->amount }}</td>
                                     <td>
+                                        <span class="badge badge-info">Reserved</span>
                                         @if ( $order->status == 1 )
-                                        <a  class="btn btn-success btn-sm" href="{{ url('/split/send/payment') }}/{{ $order->id }}">
-                                            Confirm Sending
-                                        </a>
-                                        <a class="btn btn-danger btn-sm" href="{{ url('/split/drop/order') }}/{{ $order->id }}">
-                                            Drop Order
-                                        </a>
+
                                         @elseif ( $order->status == 2 )
                                             <span class="badge badge-info">Awaiting Approval</span>
                                         @elseif ( $order->status == 3 )
                                             <span class="badge badge-info">Received</span>
                                         @endif
-                                        <a href="{{ url( '/banking/details/' ) }}/{{ $order->id }}" class="btn btn-info btn-sm">
-                                            Member Details
+                                        <a  class="btn btn-success btn-sm" href="{{ url('/send/payment') }}/{{ $order->id }}">
+                                            Confirm Sending
+                                        </a>
+                                        <a  class="btn btn-success btn-sm" href="{{ url('/received/payment') }}/{{ $order->id }}">
+                                            Confirm Received
+                                        </a>
+                                        <a class="btn btn-danger btn-sm" href="{{ url('/drop/order') }}/{{ $order->id }}">
+                                            Drop Order
                                         </a>
                                     </td>
                                 </tr>
