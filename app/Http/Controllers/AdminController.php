@@ -95,7 +95,7 @@ class AdminController extends Controller
 
     public function orders() {
 
-    	$user 						= User::where( 'role', 2 )->get() ;
+    	$user 						= User::where( 'role', 2 )->where( 'role', 4 )->get() ;
 
         return view( 'orders', ['users' => $user ] ) ;
 
