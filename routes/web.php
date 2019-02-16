@@ -28,7 +28,7 @@ Route::post('/password/update', 'ProfileController@password_update') ;
 
 //SPLIT URL's
 //
-Route::get('/split/sender/details/{order_id}', 'SplitController@split_banking_details') ;
+Route::get('/split/banking/details/{order_id}', 'SplitController@split_banking_details') ;
 Route::get('/split/received/payment/{order_id}', 'SplitController@split_received_payment') ;
 Route::get('/split/send/payment/{order_id}', 'SplitController@split_send_payment') ;
 Route::get('/split/drop/order/{order_id}', 'SplitController@split_drop_payment') ;
