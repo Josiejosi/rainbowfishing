@@ -85,7 +85,7 @@
                                         <td>
 
                                             <a type="button" class="btn btn-success" 
-                                                href="{{ url('/received/payment') }}/{{ $order->id }}">
+                                                href="{{ url('/split/received/payment') }}/{{ $order->id }}">
                                                 Confirm Received
                                             </a>
 
@@ -99,7 +99,7 @@
 
                                     <td>
                                         
-                                        <a href="{{ url( '/sender/details/' ) }}/{{ $sender->id }}/ {{ $order->amount }}" 
+                                        <a href="{{ url( '/split/sender/details/' ) }}/{{ $sender->id }}/ {{ $order->amount }}" 
                                             class="btn btn-info btn-block btn-sm">
                                             Sender Details
                                         </a>
