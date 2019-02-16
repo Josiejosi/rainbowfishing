@@ -87,13 +87,13 @@
                             </div>
                             <div class="sidebar-content">
 
-                                <a href="{{ url( '/admins' ) }}" class="sidebar-item">
+                                <a href="{{ url( '/super' ) }}" class="sidebar-item">
                                     <i class="fas fa-user"></i>
-                                    <span class="align-middle">New Super-Admin</span>
+                                    <span class="align-middle">Super Admin</span>
                                 </a>
-                                <a href="{{ url( '/orders' ) }}" class="sidebar-item">
+                                <a href="{{ url( '/super/order' ) }}" class="sidebar-item">
                                     <i class="fas fa-money-check-alt"></i>
-                                    <span class="align-middle">Add Super-Admin Order</span>
+                                    <span class="align-middle">Super Order</span>
                                 </a>
                             </div>
                         </div>

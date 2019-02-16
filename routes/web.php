@@ -59,10 +59,21 @@ Route::get('/notification/markasread/{notification_id}', 'NotificationsControlle
 Route::get('/admins', 'AdminController@index')->name('admins') ;
 Route::post('/admin/create', 'AdminController@admin_registration') ;
 Route::get('/orders', 'AdminController@orders')->name('orders') ;
-Route::post('/admin/order', 'AdminController@admin_orders')->name('orders') ;
+Route::post('/admin/order', 'AdminController@admin_orders') ;
 Route::get('/users', 'AdminController@users')->name('users') ;
 Route::get('/user/block/{user_id}', 'AdminController@block_user') ;
 Route::get('/user/unblock/{user_id}', 'AdminController@unblock_user') ;
 Route::get('/user/activate/{user_id}', 'AdminController@activate_user') ;
 Route::get('/ph', 'AdminController@ph') ;
 Route::get('/admin/upcoming', 'AdminController@admin_upcoming') ;
+
+/*
+|--------------------------------------------------------------------------
+| Admin Panel
+|--------------------------------------------------------------------------
+|
+*/
+Route::get('/super', 'SuperUserController@index')->name('super') ;
+Route::post('/super/create', 'SuperUserController@admin_registration') ;
+Route::get('/super/order', 'SuperUserController@orders') ;
+Route::post('/super/order', 'SuperUserController@admin_orders') ;
