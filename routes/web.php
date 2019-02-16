@@ -35,6 +35,8 @@ Route::get('/split/drop/order/{order_id}', 'SplitController@split_drop_payment')
 //
 //END OF SPLIT URL's
 
+Route::get('/sender/details/{user_id}/{amount}', 'SenderController@index') ;
+
 Route::get('/account', 'AccountController@index')->name('account')  ;
 Route::post('/account/update', 'AccountController@account_update') ;
 
