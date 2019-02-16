@@ -99,7 +99,7 @@
 
                                     <td>
                                         
-                                        <a href="{{ url( '/split/sender/details/' ) }}/{{ $sender->id }}/{{ $order->amount }}" 
+                                        <a href="{{ url( '/sender/details/' ) }}/{{ $sender->id }}/{{ $order->amount }}" 
                                             class="btn btn-info btn-block btn-sm">
                                             Sender Details
                                         </a>
