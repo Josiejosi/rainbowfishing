@@ -29,7 +29,7 @@ class AdminController extends Controller
 
         $orders                     = Orders::where( 'matures_at', '<', Carbon::now() )
                                              ->where( 'status', 0 )
-                                             ->orderBy('matures_at', 'desc')->take(15)
+                                             ->orderBy('matures_at', 'desc')
                                              ->get() ;
 
         return view( 'admin_upcoming', [

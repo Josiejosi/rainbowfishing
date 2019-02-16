@@ -24,12 +24,16 @@
 
                             @foreach( $orders as $order )
 
+                                @if ( $order->user->role != 3 )
+
                                 <tr>
                                     <td>RF00{{ $order->id }}</td>
                                     <td>{{ isset( $order->user->name ) ? $order->user->name : 'Not set' }}</td>
                                     <td>{{ isset( $order->user->account->bank ) ? $order->user->account->bank : 'Not set' }}</td>
                                     <td>R {{ $order->amount }}</td>
                                 </tr>
+
+                                @endif
 
                             @endforeach
 
