@@ -28,14 +28,6 @@
                                             </a> 
 
                                         </td>
-                                        <td>     
-
-                                            <a class="btn btn-danger btn-sm" 
-                                                href="{{ url('/drop/order') }}/{{ $order->id }}">
-                                                Drop Order
-                                            </a>
-
-                                        </td>
 
                                     @elseif ( $order->status == 2 )
 
@@ -89,14 +81,6 @@
                                                 href="{{ url('/split/send/payment') }}/{{ $order->id }}">
                                                 Confirm Sending
                                             </a> 
-
-                                        </td>
-                                        <td>     
-
-                                            <a class="btn btn-danger btn-sm" 
-                                                href="{{ url('/split/drop/order') }}/{{ $order->id }}">
-                                                Drop Order
-                                            </a>
 
                                         </td>
 

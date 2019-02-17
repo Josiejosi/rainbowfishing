@@ -59,6 +59,10 @@ class HomeController extends Controller {
         $outgoing_amount            = Orders::where( 'sender_id', auth()->user()->id )->where( 'status', 3 )->get()->sum('amount') ;
         $incoming_amount            = Orders::where( 'user_id', auth()->user()->id )->where( 'status', 3 )->get()->sum('amount') ;
 
+
+        $outgoing_amount_split      = Split::where( 'sender_id', auth()->user()->id )->where( 'status', 3 )->get()->sum('amount') ;
+        $incoming_amount_split      = Split::where( 'receiver_id', auth()->user()->id )->where( 'status', 3 )->get()->sum('amount') ;
+
         return view( 'home', [
 
             'list_hour'             => Helpers::getSlotTime(), 
@@ -70,8 +74,8 @@ class HomeController extends Controller {
             'outgoing_split'        => $outgoing_split, 
             'incoming_split'        => $incoming_split, 
 
-            'outgoing_amount'       => $outgoing_amount,
-            'incoming_amount'       => $incoming_amount, 
+            'outgoing_amount'       => $outgoing_amount + $outgoing_amount_split,
+            'incoming_amount'       => $incoming_amount +  $incoming_amount_split, 
 
         ]) ;
 

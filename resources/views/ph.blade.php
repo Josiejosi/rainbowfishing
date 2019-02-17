@@ -19,7 +19,7 @@
                     </thead>
                     <tbody>
 
-                        @if ( count( $outgoing ) )
+                        @if ( count( $outgoing ) > 0 )
 
                             @foreach( $outgoing as $order )
 
@@ -59,7 +59,7 @@
 
                         @endif
 
-                        @if ( count( $outgoing_split ) )
+                        @if ( count( $outgoing_split ) > 0 )
 
                             @foreach( $outgoing_split as $order )
 
@@ -84,13 +84,13 @@
                                         @elseif ( $order->status == 3 )
                                             <span class="badge badge-info">Received</span>
                                         @endif
-                                        <a  class="btn btn-success btn-sm" href="{{ url('/send/payment') }}/{{ $order->id }}">
+                                        <a  class="btn btn-success btn-sm" href="{{ url('/split/send/payment') }}/{{ $order->id }}">
                                             Confirm Sending
                                         </a>
-                                        <a  class="btn btn-success btn-sm" href="{{ url('/received/payment') }}/{{ $order->id }}">
+                                        <a  class="btn btn-success btn-sm" href="{{ url('split/received/payment') }}/{{ $order->id }}">
                                             Confirm Received
                                         </a>
-                                        <a class="btn btn-danger btn-sm" href="{{ url('/drop/order') }}/{{ $order->id }}">
+                                        <a class="btn btn-danger btn-sm" href="{{ url('/split/drop/order') }}/{{ $order->id }}">
                                             Drop Order
                                         </a>
                                     </td>

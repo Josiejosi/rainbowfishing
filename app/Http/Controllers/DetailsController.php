@@ -37,85 +37,89 @@ class DetailsController extends Controller
 
         $order                              = Orders::find( $request->order_id ) ;
 
-        if ( $request->amount < 50 ) {
+        if ( $order->status == 0 ) {
+            if ( $request->amount < 50 ) {
 
-            flash( "Please provide amounts between 50 and " . $order->amount )->error() ;
-            return redirect()->back() ;
-            
-        }
+                flash( "Please provide amounts between 50 and " . $order->amount )->error() ;
+                return redirect()->back() ;
+                
+            }
 
-        if ( $request->amount > 2000 ) {
+            if ( $request->amount > 2000 ) {
 
-            flash( "Please provide amounts between R 50 and R 2000" )->error() ;
-            return redirect()->back() ;
-
-        }
-
-        if ( $request->amount > $order->amount ) {
-
-            flash( "Please provide amounts between R 50 and R " . $order->amount  )->error() ;
-            return redirect()->back() ;
-
-        }
-
-       // dd( $request->amount < $order->amount ) ;
-
-        if ( $request->amount < $order->amount ) {
-            
-            if ( $request->amount >= 50 || $request->amount <= 2000 ) {
-
-
-                $new_order_amount       = $order->amount - $request->amount ;
-
-                if ( $new_order_amount > 50 ) {
-
-                    $order->update( [ 'amount' => $new_order_amount, 'sender_id' => auth()->user()->id, ] ) ;
-
-                    Split::create([
-
-                        'status'        => 1, 
-                        'amount'        => $request->amount, 
-                        'receiver_id'   => $order->user_id , 
-                        'sender_id'     => auth()->user()->id, 
-                        'order_id'      => $order->id, 
-                        'is_matured'    => 1, 
-                        'matures_at'    => Carbon::now()->addHours($block_hours), 
-                        'block_at'      => Carbon::now()->addHours($block_hours),
-                        
-                    ]) ;
-                    
-                } else {
-
-                    flash( "Remaining amount from split must be greater than R 50, You trying to leave R " . $new_order_amount )->error() ;
-                    return redirect()->back() ;  
-
-                }
-
-            } else {
-
-                flash( "Split amount must be between R 50 and R 2000" )->error() ;
+                flash( "Please provide amounts between R 50 and R 2000" )->error() ;
                 return redirect()->back() ;
 
             }
 
-        }
+            if ( $request->amount > $order->amount ) {
 
-        if ( $order->amount == $request->amount ) {
-
-            if ( $order->status == 0 ) {
-
-                $order->update( [ 'status' => '1', 'sender_id' => auth()->user()->id, 'block_at' => Carbon::now()->addHours($block_hours) ] ) ;
-
-                Notifications::create( "You reserved Order: RF00" . $request->order_id . ", Please make a payment in the next 6 hours.", $request->user_id ) ;
-                Notifications::create( "Your  Order: RF00" . $request->order_id . ", was reserved.", auth()->user()->id ) ;
-
-                flash( "You reserved <b>'Order: RF00" . $request->order_id . "'</b>, Please make a payment in the next 6 hours."  )->success() ;
-
-            } else {
-
-                flash( "Member already reserved."  )->success() ;
+                flash( "Please provide amounts between R 50 and R " . $order->amount  )->error() ;
+                return redirect()->back() ;
 
             }
+
+           // dd( $request->amount < $order->amount ) ;
+
+            if ( $request->amount < $order->amount ) {
+                
+                if ( $request->amount >= 50 || $request->amount <= 2000 ) {
+
+
+                    $new_order_amount       = $order->amount - $request->amount ;
+
+                    if ( $new_order_amount > 50 ) {
+
+                        $order->update( [ 'amount' => $new_order_amount, 'sender_id' => auth()->user()->id, ] ) ;
+
+                        Split::create([
+
+                            'status'        => 1, 
+                            'amount'        => $request->amount, 
+                            'receiver_id'   => $order->user_id , 
+                            'sender_id'     => auth()->user()->id, 
+                            'order_id'      => $order->id, 
+                            'is_matured'    => 1, 
+                            'matures_at'    => Carbon::now()->addHours($block_hours), 
+                            'block_at'      => Carbon::now()->addHours($block_hours),
+                            
+                        ]) ;
+                        
+                    } else {
+
+                        flash( "Remaining amount from split must be greater than R 50, You trying to leave R " . $new_order_amount )->error() ;
+                        return redirect()->back() ;  
+
+                    }
+
+                } else {
+
+                    flash( "Split amount must be between R 50 and R 2000" )->error() ;
+                    return redirect()->back() ;
+
+                }
+
+            }
+
+            if ( $order->amount == $request->amount ) {
+
+                if ( $order->status == 0 ) {
+
+                    $order->update( [ 'status' => '1', 'sender_id' => auth()->user()->id, 'block_at' => Carbon::now()->addHours($block_hours) ] ) ;
+
+                    Notifications::create( "You reserved Order: RF00" . $request->order_id . ", Please make a payment in the next 6 hours.", $request->user_id ) ;
+                    Notifications::create( "Your  Order: RF00" . $request->order_id . ", was reserved.", auth()->user()->id ) ;
+
+                    flash( "You reserved <b>'Order: RF00" . $request->order_id . "'</b>, Please make a payment in the next 6 hours."  )->success() ;
+
+                } else {
+
+                    flash( "Member already reserved."  )->success() ;
+
+                }
+            }
+        } else {
+            flash( "Sorry, too late fish already taken."  )->error() ;
         }
 
         return redirect( '/home' ) ;
