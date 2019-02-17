@@ -25,7 +25,7 @@ class SplitController extends Controller
 
     public function split_received_payment($order_id) {
 
-        $maurity_time                  = 5 ;
+        $maurity_time                  = 24 ;
 
     	$order                         = Split::find( $order_id ) ;
 

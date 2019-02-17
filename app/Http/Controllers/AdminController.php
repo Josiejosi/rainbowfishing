@@ -141,7 +141,9 @@ class AdminController extends Controller
 
     	$user 						= User::find( $user_id ) ;
 
-    	$user->update(['is_blocked'=>0]) ;
+        dump($user) ;
+
+    	$user->update(['is_blocked'=>1]) ;
 
         flash( $user->name . ' account blocked.' )->success() ;
         return redirect()->back() ;
@@ -151,7 +153,10 @@ class AdminController extends Controller
     public function unblock_user($user_id) {
 
     	$user 						= User::find( $user_id ) ;
-    	$user->update(['is_blocked'=>1]) ;
+
+        dump($user) ;
+
+    	$user->update(['is_blocked'=>0]) ;
         flash( $user->name . ' account unblocked.' )->success() ;
         return redirect()->back() ;
 

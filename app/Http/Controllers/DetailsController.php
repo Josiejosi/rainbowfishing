@@ -144,7 +144,7 @@ class DetailsController extends Controller
 
     public function received_payment( $order_id ) {
 
-        $maurity_time                  = 5 ;
+        $maurity_time                  = 24 ;
 
     	$order                         = Orders::find( $order_id ) ;
 

@@ -14,7 +14,7 @@ use App\Classes\Helpers ;
 
 class HomeController extends Controller {
 
-    public function __construct() { $this->middleware( 'auth' ) ; }
+    public function __construct() { $this->middleware( 'auth' ) ; $this->middleware( 'blocked' ) ; }
 
     public function index() {
 
@@ -29,30 +29,30 @@ class HomeController extends Controller {
         $orders                     = Orders::where( 'matures_at', '<', Carbon::now() )
                                              ->where( 'status', 0 )
                                              ->where( 'user_id', '<>', auth()->user()->id )
-                                             ->orderBy('matures_at', 'desc')->take(15)
+                                             ->orderBy('created_at', 'desc')->take(15)
                                              ->get() ;
 
         $outgoing                   = Orders::where( 'sender_id', auth()->user()->id )
                                             ->where( 'status','<>', 0 )
-                                            ->orderBy('updated_at', 'desc')
+                                            ->orderBy('created_at', 'desc')
                                             ->take(5)
                                             ->get() ;
 
         $incoming                   = Orders::where( 'user_id', auth()->user()->id )
                                              ->where( 'status','<>', 0 )
-                                             ->orderBy('updated_at', 'desc')
+                                             ->orderBy('created_at', 'desc')
                                              ->take(5)
                                              ->get() ;
 
         $outgoing_split             = Split::where( 'sender_id', auth()->user()->id )
                                             ->where( 'status','<>', 0 )
-                                            ->orderBy('updated_at', 'desc')
+                                            ->orderBy('created_at', 'desc')
                                             ->take(5)
                                             ->get() ;
 
         $incoming_split             = Split::where( 'receiver_id', auth()->user()->id )
                                              ->where( 'status','<>', 0 )
-                                             ->orderBy('updated_at', 'desc')
+                                             ->orderBy('created_at', 'desc')
                                              ->take(5)
                                              ->get() ;
 

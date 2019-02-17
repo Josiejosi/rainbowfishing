@@ -33,7 +33,7 @@
         					</td>
         					<td>
         						@if ( $user->is_blocked == 1 )
-        						<span class="label label-success">Active User</span>
+        						<span class="badge badge-success">InActive User</span>
         						@else
 								<a href="{{ url( '/user/activate/' ) }}/{{ $user->id }}" class="btn btn-success">Activate</a>
         						@endif        						

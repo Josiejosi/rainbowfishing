@@ -11,4 +11,10 @@ class FrontendController extends Controller
     	return redirect('/login') ;
     	
     }
+
+    public function blocked() {
+
+    	return view('auth.blocked') ;
+    	
+    }
 }

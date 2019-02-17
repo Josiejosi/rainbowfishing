@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'FrontendController@index')->name('index') ;
+Route::get('/blocked', 'FrontendController@blocked')->name('blocked') ;
 
 Auth::routes();
 

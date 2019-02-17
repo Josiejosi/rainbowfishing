@@ -15,6 +15,20 @@ class Blocked
      */
     public function handle($request, Closure $next)
     {
+        if (auth()->check() ) {
+
+            \Log::info( auth()->user()->is_blocked ) ;
+
+            if ( auth()->user()->is_blocked == 1 ) {
+                
+                return redirect( '/blocked' ) ;
+            }
+
+        }
+
+
+        
+
         return $next($request);
     }
 }
