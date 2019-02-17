@@ -34,8 +34,8 @@
 	        $twelve_string 				= '12pm' ; //TODO: Change back to 12pm
 	        $one_string 				= '1pm' ; //TODO: Change back to 1pm
 
-	        $eight_string 				= '8pm' ;
-	        $nine_string 				= '9pm' ;
+	        $eight_string 				= '7pm' ;
+	        $nine_string 				= '8pm' ;
 
 	        $timezone                   = 'Africa/Johannesburg' ;
 
