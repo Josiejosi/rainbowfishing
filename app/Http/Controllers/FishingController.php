@@ -28,7 +28,7 @@ class FishingController extends Controller
         $orders                     = Orders::where( 'matures_at', '<', Carbon::now() )
                                              ->where( 'status', 0 )
                                              ->where( 'user_id', '<>', auth()->user()->id )
-                                             ->orderBy('matures_at', 'desc')->take(15)
+                                             ->orderBy('matures_at', 'desc')
                                              ->get() ;
 
         $outgoing                   = Orders::where( 'sender_id', auth()->user()->id )
