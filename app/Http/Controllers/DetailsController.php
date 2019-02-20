@@ -45,9 +45,9 @@ class DetailsController extends Controller
                 
             }
 
-            if ( $request->amount > 2000 ) {
+            if ( $request->amount > 1000 ) {
 
-                flash( "Please provide amounts between R 50 and R 2000" )->error() ;
+                flash( "Please provide amounts between R 50 and R 1000" )->error() ;
                 return redirect()->back() ;
 
             }
@@ -63,7 +63,7 @@ class DetailsController extends Controller
 
             if ( $request->amount < $order->amount ) {
                 
-                if ( $request->amount >= 50 || $request->amount <= 2000 ) {
+                if ( $request->amount >= 50 || $request->amount <= 1000 ) {
 
 
                     $new_order_amount       = $order->amount - $request->amount ;
@@ -94,7 +94,7 @@ class DetailsController extends Controller
 
                 } else {
 
-                    flash( "Split amount must be between R 50 and R 2000" )->error() ;
+                    flash( "Split amount must be between R 50 and R 1000" )->error() ;
                     return redirect()->back() ;
 
                 }
@@ -107,8 +107,8 @@ class DetailsController extends Controller
 
                     $order->update( [ 'status' => '1', 'sender_id' => auth()->user()->id, 'block_at' => Carbon::now()->addHours($block_hours) ] ) ;
 
-                    Notifications::create( "You reserved Order: RF00" . $request->order_id . ", Please make a payment in the next 6 hours.", $request->user_id ) ;
-                    Notifications::create( "Your  Order: RF00" . $request->order_id . ", was reserved.", auth()->user()->id ) ;
+                    Notifications::create( "You reserved Order: RF00" . $request->order_id . ", Please make a payment in the next 6 hours.", auth()->user()->id ) ;
+                    Notifications::create( "Your  Order: RF00" . $request->order_id . ", was reserved.", $order->user_id ) ;
 
                     flash( "You reserved <b>'Order: RF00" . $request->order_id . "'</b>, Please make a payment in the next 6 hours."  )->success() ;
 
@@ -161,7 +161,7 @@ class DetailsController extends Controller
                 'user_id'               => $order->sender_id, 
                 'sender_id'             => 0, 
                 'is_matured'            => 1, 
-                'matures_at'            => Carbon::now()->addHours( $maurity_time ),
+                'matures_at'            => Carbon::now() , //TODO: Add later.->addHours( $maurity_time ),
                 'block_at'              => null,
 
             ]) ;
@@ -175,7 +175,7 @@ class DetailsController extends Controller
                 'user_id'               => $order->sender_id, 
                 'sender_id'             => 0, 
                 'is_matured'            => 1, 
-                'matures_at'            => Carbon::now()->addHours( $maurity_time ),
+                'matures_at'            => Carbon::now() , //TODO: Add later.->addHours( $maurity_time ),
                 'block_at'              => null,
 
             ]) ;
@@ -189,7 +189,7 @@ class DetailsController extends Controller
         		'user_id'				=> $order->sender_id, 
         		'sender_id' 			=> 0, 
         		'is_matured' 			=> 1, 
-                'matures_at'            => Carbon::now()->addHours( $maurity_time ),
+                'matures_at'            => Carbon::now(), //TODO: Add later.->addHours( $maurity_time ),
         		'block_at' 			    => null,
 
         	]) ;

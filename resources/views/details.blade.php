@@ -44,8 +44,8 @@
         							<td>{{ isset( $order->user->account->branch_code  ) ? $order->user->account->branch_code : '' }}</td>
         						</tr>
                                 <tr>
-                                    <td>Min: R 50.00</td>
-                                    <td>Max: R 2000.00</td>
+                                    <td>Min: R 200.00</td>
+                                    <td>Max: R 1000.00</td>
                                 </tr>
         						<tr>
         							<td>Amount:</td>

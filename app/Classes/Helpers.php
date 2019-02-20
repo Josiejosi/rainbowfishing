@@ -32,10 +32,10 @@
 	        $late_list                  = false ;
 
 	        $twelve_string 				= '12pm' ; //TODO: Change back to 12pm
-	        $one_string 				= '1pm' ; //TODO: Change back to 1pm
+	        $one_string 				= '12:30pm' ; //TODO: Change back to 1pm
 
-	        $eight_string 				= '7pm' ;
-	        $nine_string 				= '8pm' ;
+	        $eight_string 				= '8pm' ;
+	        $nine_string 				= '9pm' ;
 
 	        $timezone                   = 'Africa/Johannesburg' ;
 

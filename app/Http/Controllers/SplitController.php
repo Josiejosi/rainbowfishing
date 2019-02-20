@@ -33,21 +33,21 @@ class SplitController extends Controller
 
     	$new_amount 				   = round( $order->amount + ( ( $order->amount * 30 ) /100 ) ) ;
 
-        if ( $new_amount > 2000 ) {
+        if ( $new_amount > 1000 ) {
  
             $new_order                  = Orders::create([
 
                 'status'                => 0, 
-                'amount'                => 2000, 
+                'amount'                => 1000, 
                 'user_id'               => $order->sender_id, 
                 'sender_id'             => 0, 
                 'is_matured'            => 1, 
-                'matures_at'            => Carbon::now()->addHours( $maurity_time ),
+                'matures_at'            => Carbon::now(), //TODO: Add later.->addHours( $maurity_time ),
                 'block_at'              => null,
 
             ]) ;
 
-            $remaining_amount           = $new_amount - 2000 ;
+            $remaining_amount           = $new_amount - 1000 ;
 
             $new_order                  = Orders::create([
 
@@ -56,7 +56,7 @@ class SplitController extends Controller
                 'user_id'               => $order->sender_id, 
                 'sender_id'             => 0, 
                 'is_matured'            => 1, 
-                'matures_at'            => Carbon::now()->addHours( $maurity_time ),
+                'matures_at'            => Carbon::now(), //TODO: Add later.->addHours( $maurity_time ),
                 'block_at'              => null,
 
             ]) ;
@@ -70,7 +70,7 @@ class SplitController extends Controller
         		'user_id'				=> $order->sender_id, 
         		'sender_id' 			=> 0, 
         		'is_matured' 			=> 1, 
-                'matures_at'            => Carbon::now()->addHours( $maurity_time ),
+                'matures_at'            => Carbon::now(), //TODO: Add later.->addHours( $maurity_time ),
         		'block_at' 			    => null,
 
         	]) ;
