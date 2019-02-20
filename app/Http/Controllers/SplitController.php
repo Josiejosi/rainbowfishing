@@ -42,7 +42,7 @@ class SplitController extends Controller
                 'user_id'               => $order->sender_id, 
                 'sender_id'             => 0, 
                 'is_matured'            => 1, 
-                'matures_at'            => Carbon::now(), //TODO: Add later.->addHours( $maurity_time ),
+                'matures_at'            => Carbon::now()->addHours( $maurity_time ),
                 'block_at'              => null,
 
             ]) ;
@@ -56,7 +56,7 @@ class SplitController extends Controller
                 'user_id'               => $order->sender_id, 
                 'sender_id'             => 0, 
                 'is_matured'            => 1, 
-                'matures_at'            => Carbon::now(), //TODO: Add later.->addHours( $maurity_time ),
+                'matures_at'            => Carbon::now()->addHours( $maurity_time ),
                 'block_at'              => null,
 
             ]) ;
@@ -70,7 +70,7 @@ class SplitController extends Controller
         		'user_id'				=> $order->sender_id, 
         		'sender_id' 			=> 0, 
         		'is_matured' 			=> 1, 
-                'matures_at'            => Carbon::now(), //TODO: Add later.->addHours( $maurity_time ),
+                'matures_at'            => Carbon::now()->addHours( $maurity_time ),
         		'block_at' 			    => null,
 
         	]) ;

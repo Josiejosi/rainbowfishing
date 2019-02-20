@@ -41,7 +41,7 @@
                                         @elseif ( $order->status == 2 )
                                             <span class="badge badge-info">Awaiting Approval</span>
                                         @elseif ( $order->status == 3 )
-                                            <span class="badge badge-info">Received</span>
+                                            <span class="badge badge-info">Paid</span>
                                         @endif
                                         <a  class="btn btn-success btn-sm" href="{{ url('/send/payment') }}/{{ $order->id }}">
                                             Confirm Sending
@@ -82,7 +82,7 @@
                                         @elseif ( $order->status == 2 )
                                             <span class="badge badge-info">Awaiting Approval</span>
                                         @elseif ( $order->status == 3 )
-                                            <span class="badge badge-info">Received</span>
+                                            <span class="badge badge-info">Paid</span>
                                         @endif
                                         <a  class="btn btn-success btn-sm" href="{{ url('/split/send/payment') }}/{{ $order->id }}">
                                             Confirm Sending

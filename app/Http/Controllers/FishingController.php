@@ -29,7 +29,7 @@ class FishingController extends Controller
                                              ->where( 'status', 0 )
                                              ->where( 'user_id', '<>', auth()->user()->id )
                                              ->orderBy('matures_at', 'desc')
-                                             ->paginate(15) ;
+                                             ->paginate(5) ;
 
         $outgoing                   = Orders::where( 'sender_id', auth()->user()->id )
                                             ->where( 'status','<>', 0 )
