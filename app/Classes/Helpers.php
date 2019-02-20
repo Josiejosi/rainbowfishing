@@ -31,7 +31,7 @@
 	        $early_list                 = false ;
 	        $late_list                  = false ;
 
-	        $twelve_string 				= '11pm' ; //TODO: Change back to 12pm
+	        $twelve_string 				= '11am' ; //TODO: Change back to 12pm
 	        $one_string 				= '12pm' ; //TODO: Change back to 1pm
 
 	        $eight_string 				= '8pm' ;
