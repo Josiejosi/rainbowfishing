@@ -75,7 +75,7 @@
                         </tbody>
                     </table>
                 </div>
-
+                {{ $orders->links() }}
             @else
 
 
