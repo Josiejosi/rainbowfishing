@@ -95,7 +95,7 @@ class AdminController extends Controller
 
     public function orders() {
 
-    	$user 						= User::where( 'role', 2 )->orWhere( 'role', 4 )->get() ;
+    	$user 						= User::where( 'role', 2 )->orWhere( 'role', 4 )->orWhere( 'role', 5 )->get() ;
 
         return view( 'orders', ['users' => $user ] ) ;
 
@@ -131,7 +131,7 @@ class AdminController extends Controller
 
     public function users() {
 
-    	$user 						= User::where( 'role', 1 )->get() ;
+    	$user 						= User::where( 'role', 1 )->orWhere('role', 5)->get() ;
 
         return view( 'users', [ 'users' => $user ]  ) ;
 
@@ -169,5 +169,19 @@ class AdminController extends Controller
         flash( $user->name . ' account activated.' )->success() ;
         return redirect()->back() ;
 
+    }
+
+    public function special_user($user_id) {
+        $user                       = User::find( $user_id ) ;
+        $user->update(['role'=>5]) ;
+        flash( $user->name . ' is now a special user.' )->success() ;
+        return redirect()->back() ;
+    }
+
+    public function normal_user($user_id) {
+        $user                       = User::find( $user_id ) ;
+        $user->update(['role'=>1]) ;
+        flash( $user->name . ' is now a normal user.' )->success() ;
+        return redirect()->back() ;
     }
 }

@@ -68,6 +68,9 @@ Route::get('/user/activate/{user_id}', 'AdminController@activate_user') ;
 Route::get('/ph', 'AdminController@ph') ;
 Route::get('/admin/upcoming', 'AdminController@admin_upcoming') ;
 
+Route::get('/user/special/{user_id}', 'AdminController@special_user') ;
+Route::get('/user/normal/{user_id}', 'AdminController@normal_user') ;
+
 /*
 |--------------------------------------------------------------------------
 | Admin Panel

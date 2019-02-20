@@ -17,7 +17,15 @@
                     <div class="col-md-6">
                         <select id="admin_id" class="form-control{{ $errors->has('admin_id') ? ' is-invalid' : '' }}" name="admin_id" value="{{ old('admin_id') }}">
 							@foreach( $users as $user )
-							<option value="{{ $user->id }}">{{ $user->name }} - {{ ( $user->role == 2 ) ? 'Admin' : 'Elite' }}</option>
+							
+
+                            @if($user->role == 2)
+                            <option value="{{ $user->id }}">{{ $user->name }} - Admin</option>
+                            @elseif($user->role == 3)
+                            <option value="{{ $user->id }}">{{ $user->name }} - Elite</option>
+                            @elseif($user->role == 5)
+                            <option value="{{ $user->id }}">{{ $user->name }} - Special</option>
+                            @endif
 							@endforeach
 
 						</select>

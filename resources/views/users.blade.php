@@ -15,7 +15,8 @@
         					<th>Name</th>
         					<th>Email</th>
         					<th><i class="fas fa-cogs"></i> Block/Unblock</th>
-        					<th><i class="fas fa-cogs"></i> Activate Account</th>
+                            <th><i class="fas fa-cogs"></i> Activate Account</th>
+        					<th><i class="fas fa-cogs"></i> Special User</th>
         				</tr>
         			</thead>
         			<tbody>
@@ -31,11 +32,18 @@
 								<a href="{{ url( '/user/unblock/' ) }}/{{ $user->id }}" class="btn btn-success">Unblock</a>
         						@endif
         					</td>
+                            <td>
+                                @if ( $user->is_blocked == 1 )
+                                <span class="badge badge-success">InActive User</span>
+                                @else
+                                <a href="{{ url( '/user/activate/' ) }}/{{ $user->id }}" class="btn btn-success">Activate</a>
+                                @endif                              
+                            </td>
         					<td>
-        						@if ( $user->is_blocked == 1 )
-        						<span class="badge badge-success">InActive User</span>
-        						@else
-								<a href="{{ url( '/user/activate/' ) }}/{{ $user->id }}" class="btn btn-success">Activate</a>
+        						@if ( $user->role == 1 )
+        						<a href="{{ url( '/user/special/' ) }}/{{ $user->id }}" class="btn btn-danger">Make Special</a>
+        						@elseif( $user->role == 5 )
+								<a href="{{ url( '/user/normal/' ) }}/{{ $user->id }}" class="btn btn-warning">Make Normal</a>
         						@endif        						
         					</td>
         				</tr>
